@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        <title>MKS - Home</title>
-    </head>
-    <body>
-        <header>
-            <h1>Meme Kitten Store</h1>
-        </header>
-        <img src="../img/CuteKitty.jpg" alt="Cute Kitten">
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentMarket</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>StudentMarket</h1>
+        </div>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="profile.html">Profilo</a>
+            <a href="cart.html">Carrello</a>
+        </nav>
+    </header>
+
+    <section id="home" class="home">
+        <div class="hero">
+            <img src="../img/sigillo1x_xl.png" alt="Università di Bologna Logo" class="logo-img">
+            <h2>StudentMarket è il sito in cui studenti universitari possono fare il cash</h2>
+            <div class="buttons">
+                <button onclick="window.location.href='#shop'">Compra</button>
+                <button onclick="window.location.href='#sell'">Vendi</button>
+            </div>
+        </div>
+        <div class="description">
+            <h3>Come funziona?</h3>
+            <p>We believe in produce. Tasty produce. Produce like: libri, materiale per il fai da te e articoli usati.</p>
+        </div>
+        <div class="categories">
+            <div class="category">
+                <img src="../img/ariana.jpg" alt="Didattica">
+                <h4>Didattica</h4>
+                <p>BLA BLA BLA</p>
+            </div>
+            <div class="category">
+                <img src="../img/ariana.jpg" alt="Fai da te">
+                <h4>FAI DA TE</h4>
+                <p>BLA BLA BLA</p>
+            </div>
+            <div class="category">
+                <img src="../img/ariana.jpg" alt="Usato">
+                <h4>Usato</h4>
+                <p>BLA BLA BLA</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 StudentMarket - Università di Bologna</p>
+    </footer>
+</body>
 </html>

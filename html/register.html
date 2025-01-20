@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione - StudentMarket</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>StudentMarket</h1>
+        </div>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="login.html">Profilo</a>
+        </nav>
+    </header>
+
+    <section class="register">
+        <h2>Registrazione</h2>
+        <form class="register-form" action="register_process.php" method="post">
+            <label for="reg-username">Username</label>
+            <input type="text" id="reg-username" name="reg-username" required>
+
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" name="reg-email" required>
+
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" name="reg-password" required>
+
+            <label for="reg-confirm-password">Conferma Password</label>
+            <input type="password" id="reg-confirm-password" name="reg-confirm-password" required>
+
+            <label for="reg-fullname">Nome Completo</label>
+            <input type="text" id="reg-fullname" name="reg-fullname" required>
+
+            <label for="reg-phone">Numero di Telefono</label>
+            <input type="tel" id="reg-phone" name="reg-phone" required>
+
+            <button type="submit">Registrati</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 StudentMarket - Università di Bologna</p>
+    </footer>
+</body>
+</html>
