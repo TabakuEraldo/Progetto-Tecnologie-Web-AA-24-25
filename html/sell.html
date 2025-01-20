@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentMarket</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>StudentMarket</h1>
+        </div>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="profile.html">Profilo</a>
+            <a href="cart.html">Carrello</a>
+            <a href="sell.html">Vendi</a>
+        </nav>
+    </header>
+
+    <section id="sell" class="sell">
+        <h2>Vendi un prodotto</h2>
+        <form class="sell-form">
+            <label for="product-name">Nome del Prodotto</label>
+            <input type="text" id="product-name" name="product-name" required>
+
+            <label for="category">Categoria</label>
+            <select id="category" name="category" required>
+                <option value="">Seleziona una categoria</option>
+                <option value="didattica">Didattica</option>
+                <option value="fai-da-te">Fai da te</option>
+                <option value="usato">Usato</option>
+            </select>
+
+            <label for="quantity">Quantità Disponibile</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+
+            <label for="description">Descrizione</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="price">Prezzo di Vendita (€)</label>
+            <input type="number" id="price" name="price" step="0.01" min="0" required>
+
+            <button type="submit">Metti in Vendita</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 StudentMarket - Università di Bologna</p>
+    </footer>
+</body>
+</html>
