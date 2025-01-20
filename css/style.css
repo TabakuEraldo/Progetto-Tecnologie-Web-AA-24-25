@@ -172,3 +172,68 @@ form button:hover {
     padding: 20px;
     text-align: center;
 }
+
+/* Stile generale per la sezione di vendita */
+.sell {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sell h2 {
+    text-align: center;
+    color: #ff5a5f;
+    margin-bottom: 20px;
+}
+
+.sell-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sell-form label {
+    font-weight: bold;
+    color: #333;
+}
+
+.sell-form input,
+.sell-form select,
+.sell-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sell-form input:focus,
+.sell-form select:focus,
+.sell-form textarea:focus {
+    outline: none;
+    border-color: #ff5a5f;
+    box-shadow: 0 0 5px rgba(255, 90, 95, 0.5);
+}
+
+.sell-form button {
+    padding: 12px;
+    background-color: #ff5a5f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sell-form button:hover {
+    background-color: #e04a4f;
+}
+
+.sell-form textarea {
+    resize: none;
+}
