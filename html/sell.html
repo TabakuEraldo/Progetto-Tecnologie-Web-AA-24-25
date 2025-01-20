@@ -25,7 +25,7 @@
         <form class="sell-form">
             <label for="product-name">Nome del Prodotto</label>
             <input type="text" id="product-name" name="product-name" required>
-
+    
             <label for="category">Categoria</label>
             <select id="category" name="category" required>
                 <option value="">Seleziona una categoria</option>
@@ -33,19 +33,23 @@
                 <option value="fai-da-te">Fai da te</option>
                 <option value="usato">Usato</option>
             </select>
-
+    
             <label for="quantity">Quantità Disponibile</label>
             <input type="number" id="quantity" name="quantity" min="1" required>
-
+    
             <label for="description">Descrizione</label>
             <textarea id="description" name="description" rows="4" required></textarea>
-
+    
             <label for="price">Prezzo di Vendita (€)</label>
             <input type="number" id="price" name="price" step="0.01" min="0" required>
-
+    
+            <label for="image">Carica un'immagine del prodotto</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+    
             <button type="submit">Metti in Vendita</button>
         </form>
     </section>
+    
 
     <footer class="footer">
         <p>&copy; 2025 StudentMarket - Università di Bologna</p>
