@@ -6,10 +6,9 @@
         backdrop-filter: blur(10px);
 }
 
-.navbar-custom .toggler-myicon{
-    color: white;
+.navbar-custom a:hover{
+    text-decoration: underline;
 }
-
 
 .navbar-custom{
     background-color: #BB2E29;
@@ -17,8 +16,17 @@
 
 
 .navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
+.navbar-custom .navbar-text{
 
     color: white;
 
+}
+
+.navbar-custom .nav-link{
+    color:white;
+
+}
+.category img {
+    max-width: 100px;
+    margin-bottom: 10px;
 }
