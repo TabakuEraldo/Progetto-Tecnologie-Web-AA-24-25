@@ -13,6 +13,7 @@ CREATE TABLE Prodotti (
     nome VARCHAR(255),
     immagine VARCHAR(255),
     prezzo DECIMAL(6, 2) NOT NULL,
+    descrizione VARCHAR(1000),
     disponibilita INT NOT NULL
 );
 
