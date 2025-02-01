@@ -10,7 +10,7 @@ class DataBase{
     }
 
     public function getRandomProduct($number){
-        $query = $this->db->prepare("SELECT immagine, prezzo, disponibilita FROM prodotto ORDER BY RAND() LIMIT ?");
+        $query = $this->db->prepare("SELECT nome, immagine, prezzo, disponibilita FROM prodotti ORDER BY RAND() LIMIT ?");
         $query->bind_param('i',$number);
         $query->execute();
         $result = $query->get_result();
