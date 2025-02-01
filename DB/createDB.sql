@@ -5,12 +5,12 @@ USE ECommerceDB;
 CREATE TABLE Utenti (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    isVenditore BOOLEAN NOT NULL
+    password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Prodotti (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255),
     immagine VARCHAR(255),
     prezzo DECIMAL(6, 2) NOT NULL,
     disponibilita INT NOT NULL
