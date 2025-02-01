@@ -1,12 +1,12 @@
-<h1>STOCAZZO</h1>
+<h1>sistema il fatto che 3 vanno su una riga e poi va mobile first</h1>
 <?php foreach($pageParams["randProducts"] as $prod): ?>
-        <article>
-            <header>
-                <div>
-                    <p><?php echo $prod["immagine"]; ?></p>
-                </div>
-                <h2><?php echo $prod["nome"]; ?></h2>
-                <p><?php echo $prod["prezzo"]; ?> - <?php echo $prod["disponibilita"]; ?></p>
-            </header>
-        </article>
+    <div class="card" style="width: 18rem;">
+    <img src=<?php echo "../img/".$prod["immagine"]?> class="card-img-top" alt="Immagine del prodotto">
+    <div class="card-body">
+        <h5 class="card-title"><?php echo $prod["nome"]?></h5>
+        <p class="card-text"><?php echo $prod["descrizione"]?></p>
+        <p class="card-text"><?php echo $prod["prezzo"]?></p>
+        <p class="card-text"><?php echo $prod["disponibilita"]?></p>
+    </div>
+</div>
 <?php endforeach; ?>
