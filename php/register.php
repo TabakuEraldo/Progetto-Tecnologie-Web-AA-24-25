@@ -5,47 +5,70 @@ $username = "root"; // Modifica con i tuoi dettagli
 $password = ""; // Modifica con i tuoi dettagli
 $dbname = "studentmarket"; // Modifica con il nome del tuo database
 
-// Crea connessione
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Controllo connessione
 if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
+    die("Errore di connessione al database: " . $conn->connect_error);
 }
 
 // Prendi i dati dal modulo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fullName = mysqli_real_escape_string($conn, $_POST['fullName']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $fullName = trim($_POST['fullName']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
-    $role = $_POST['role']; // Prende il ruolo (buyer o seller)
+
+    // Controllo se i campi sono vuoti
+    if (empty($fullName) || empty($email) || empty($password) || empty($confirmPassword)) {
+        die("Tutti i campi sono obbligatori!");
+    }
+
+    // Protezione contro SQL Injection
+    $fullName = $conn->real_escape_string($fullName);
+    $email = $conn->real_escape_string($email);
+
+    // Controllo formato email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Formato email non valido!");
+    }
 
     // Controllo se le password corrispondono
     if ($password !== $confirmPassword) {
-        echo "Le password non corrispondono!";
-        exit();
+        die("Le password non corrispondono!");
     }
 
     // Verifica se l'email è già registrata
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        echo "Questa email è già registrata!";
-        exit();
+    $sql = "SELECT id FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        die("Questa email è già registrata!");
     }
+
+    $stmt->close();
 
     // Criptare la password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Inserisci i dati dell'utente nel database
-    $sql = "INSERT INTO users (name, email, password, role) VALUES ('$fullName', '$email', '$hashedPassword', '$role')";
+    // Inserisci i dati nel database con prepared statements (sicuro contro SQL Injection)
+    $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $fullName, $email, $hashedPassword);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Registrazione completata con successo! <a href='../html/login.html'>Accedi ora</a>";
+    if ($stmt->execute()) {
+        echo "<script>
+                alert('Registrazione completata con successo! Ora puoi accedere.');
+                window.location.href = '../html/login.html';
+              </script>";
     } else {
-        echo "Errore: " . $sql . "<br>" . $conn->error;
+        die("Errore durante la registrazione: " . $conn->error);
     }
+
+    $stmt->close();
 }
 
 $conn->close();

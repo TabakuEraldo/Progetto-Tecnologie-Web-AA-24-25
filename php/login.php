@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Connessione al database
 $servername = "localhost";
 $username = "root";
@@ -17,10 +19,10 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
-    $role = $_POST['role']; // Ruolo selezionato
+    $role = $_POST['role']; // Ruolo scelto (buyer o seller)
 
     // Controllo login
-    $sql = "SELECT * FROM users WHERE email = '$email' AND role = '$role'";
+    $sql = "SELECT * FROM users WHERE email = '$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -28,20 +30,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verifica della password
         if (password_verify($password, $row['password'])) {
-            // Login riuscito, reindirizza l'utente alla pagina appropriata
+            // Login riuscito, salva i dati della sessione
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_name'] = $row['name'];
+            $_SESSION['user_email'] = $row['email'];
+            $_SESSION['user_role'] = $role;  // Salva il ruolo selezionato nella sessione
+
+            // Reindirizza alla pagina appropriata in base al ruolo
             if ($role == 'buyer') {
-                header("Location: ../html/shop.html"); // Pagina per compratori
+                header("Location: ../html/profile.php"); // Pagina per compratori
             } else {
-                header("Location: ../html/sell.html"); // Pagina per venditori
+                header("Location: ../html/profile.php"); // Pagina per venditori
             }
             exit();
         } else {
             echo "Password errata!";
         }
     } else {
-        echo "Nessun utente trovato con questa email e ruolo.";
+        echo "Nessun utente trovato con questa email.";
     }
-}
 
-$conn->close();
+    $conn->close();
+}
 ?>
+
