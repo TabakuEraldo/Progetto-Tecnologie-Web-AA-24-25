@@ -17,20 +17,12 @@ class DataBase{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function login($email, $password){
+    public function login($email){
         $query = $this->db->prepare("SELECT * FROM utenti WHERE email = ?");
         $email = mysqli_real_escape_string($this->db, $email);
         $query->bind_param('s', $email);
         $query->execute();
-        $result = $query->get_result();
-
-        if ($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            if (password_verify($password, $row['password'])) {
-                return $result->fetch_assoc();
-            }
-        }
-        return null;
+        return $query->get_result();
     }
 
     public function isAlreadyRegistered($email){
