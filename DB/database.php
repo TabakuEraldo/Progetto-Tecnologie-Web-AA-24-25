@@ -9,13 +9,17 @@ class DataBase{
         }        
     }
 
-    public function getRandomProduct($number){
-        $query = $this->db->prepare("SELECT nome, immagine, prezzo, disponibilita, descrizione FROM prodotti ORDER BY RAND() LIMIT ?");
-        $query->bind_param('i',$number);
-        $query->execute();
-        $result = $query->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
+public function getRandomProduct($number){
+    // Aggiungi la colonna 'id' nella SELECT
+    $query = $this->db->prepare("SELECT id, nome, immagine, prezzo, disponibilita, descrizione FROM prodotti ORDER BY RAND() LIMIT ?");
+    $query->bind_param('i', $number);
+    $query->execute();
+    $result = $query->get_result();
+
+    // Restituisci tutti i risultati come array associativo
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 
     public function login($email, $password){
         $query = $this->db->prepare("SELECT * FROM utenti WHERE email = ?");
