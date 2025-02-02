@@ -1,9 +1,13 @@
 <div class="container mt-5">
   <h2>Registrati al sito</h2>
-  <form action="../php/register.php" method="POST">
+  <form action="../php/executeRegistration.php" method="POST">
     <div class="mb-3">
-      <label for="fullName" class="form-label">Nome Completo</label>
+      <label for="fullName" class="form-label">Nome</label>
       <input type="text" class="form-control" id="fullName" name="fullName" required>
+    </div>
+    <div class="mb-3">
+      <label for="cognome" class="form-label">Cognome</label>
+      <input type="text" class="form-control" id="cognome" name="cognome" required>
     </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -22,5 +26,5 @@
   </form>
 
   <!-- Link per il login -->
-  <p class="mt-3">Hai già un account? <a href="login.html">Accedi qui</a></p>
+  <p class="mt-3">Hai già un account? <a href="login.php">Accedi qui</a></p>
 </div>

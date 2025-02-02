@@ -21,5 +21,5 @@
   </form>
 
   <!-- Link per la registrazione -->
-  <p class="mt-3">Non hai un account? <a href="register.html">Registrati qui</a></p>
+  <p class="mt-3">Non hai un account? <a href="register.php">Registrati qui</a></p>
 </div>

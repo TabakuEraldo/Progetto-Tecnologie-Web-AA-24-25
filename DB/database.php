@@ -33,5 +33,25 @@ class DataBase{
         return null;
     }
 
+    public function isAlreadyRegistered($email){
+        $sql = "SELECT id FROM utenti WHERE email = ?";
+        $stmt = $this->db->prepare($sql);
+        $email = $this->db->real_escape_string($email);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        return $stmt->num_rows;
+    }
+
+    public function registration($nome, $cognome, $email, $hashPass){
+        $nome = $this->db->real_escape_string($nome);
+        $cognome = $this->db->real_escape_string($cognome);
+        $sql = "INSERT INTO `ecommercedb`.`utenti` (`email`, `nome`, `cognome`, `password`) VALUES (?, ?, ?, ?);";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("ssss", $email, $nome, $cognome, $hashPass);
+        return $stmt->execute();
+    }
+
 }
 ?>
