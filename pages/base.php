@@ -12,7 +12,7 @@
     <nav class="navbar navbar-custom navbar-expand-lg">
         <div class="container-fluid">
           <!-- navbar -->
-          <a class="navbar-brand" href="index.html">StudentMarket</a>
+          <a class="navbar-brand" href="index.php">StudentMarket</a>
 
           <!-- sidebar -->
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -32,19 +32,19 @@
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
                 <li class="nav-item">
-                  <a class="nav-link" href="profile.html">Profilo</a>
+                  <a class="nav-link" href="profile.php">Profilo</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="shop.php">Compra</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="sell.html">Vendi</a>
+                  <a class="nav-link" href="sell.php">Vendi</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="cart.html">Carrello</a>
+                  <a class="nav-link" href="cart.php">Carrello</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Accedi</a>
+                    <a class="nav-link" href="login.php">Accedi</a>
                   </li>
               </ul>       
             </div>

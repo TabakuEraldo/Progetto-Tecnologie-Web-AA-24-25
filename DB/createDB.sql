@@ -4,7 +4,9 @@ USE ECommerceDB;
 
 CREATE TABLE Utenti (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    cognome VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
