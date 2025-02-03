@@ -25,9 +25,9 @@
             </div>
 
             <div class="offcanvas-body">
-              <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Cerca</button>
+              <form class="d-flex mt-3" role="search" action="../php/shop.php" method="GET">
+                <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" id="search">
+                <button class="btn btn-outline-light" type="submit" data-bs-dismiss="offcanvas">Cerca</button>
               </form>
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
