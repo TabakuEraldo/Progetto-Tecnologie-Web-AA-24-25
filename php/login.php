@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'start.php';
 
 $pageParams["nome"] = "../pages/viewLogin.php";

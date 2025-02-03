@@ -1,3 +1,8 @@
+<?php 
+$userName = $_SESSION['user_name'] ?? 'Utente';
+$userEmail = $_SESSION['user_email'] ?? 'Email non disponibile';
+$userRole = $_SESSION['user_role'] ?? null;
+?>
 <div class="container mt-5">
     <h1 class="mb-4">Benvenuto, <?php echo htmlspecialchars($userName); ?>!</h1>
     <p>Email: <?php echo htmlspecialchars($userEmail); ?></p>

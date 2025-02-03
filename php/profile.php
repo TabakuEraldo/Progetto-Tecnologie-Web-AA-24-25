@@ -6,11 +6,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-//???????
-$userName = $_SESSION['user_name'] ?? 'Utente';
-$userEmail = $_SESSION['email'] ?? 'Email non disponibile';
-$userRole = $_SESSION['user_role'] ?? null;
-
 $pageParams["nome"] = "../pages/viewProfile.php";
 require '../pages/base.php';
 ?>

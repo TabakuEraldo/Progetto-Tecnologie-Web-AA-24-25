@@ -21,6 +21,5 @@
     <button type="submit" class="btn btn-primary">Registrati</button>
   </form>
 
-  <!-- Link per il login -->
-  <p class="mt-3">Hai già un account? <a href="login.html">Accedi qui</a></p>
+  <p class="mt-3">Hai già un account? <a href="../php/login.php">Accedi qui</a></p>
 </div>
