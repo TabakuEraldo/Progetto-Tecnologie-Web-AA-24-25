@@ -2,10 +2,8 @@
     <h1 class="mb-4">Benvenuto, <?php echo htmlspecialchars($userName); ?>!</h1>
     <p>Email: <?php echo htmlspecialchars($userEmail); ?></p>
     <p>Ruolo: <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
-    
     <hr>
 
-    <!-- Sezione funzionalità specifiche in base al ruolo -->
     <?php if ($userRole == 'buyer'): ?>
         <h2>Area Compratore</h2>
         <div class="row">
@@ -71,7 +69,6 @@
         </div>
     <?php endif; ?>
 
-    <!-- Funzionalità comuni -->
     <div class="mt-4">
         <h2>Il Tuo Profilo</h2>
         <p>Qui puoi aggiornare i tuoi dati personali e gestire le impostazioni del tuo account.</p>
