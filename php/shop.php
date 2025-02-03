@@ -1,14 +1,16 @@
 <?php
-require_once '../php/start.php';
+require_once 'start.php';
 
-$pageParams["nome"] = "../pages/viewProducts.php";
-$pageParams["products"] = $db->getRandomProduct(9);
+$products = [];
 
-/*if ($_SERVER["REQUEST_METHOD"] == "GET" && $_GET["search"] != null){
-    echo $_GET["search"];
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $searchTerm = $_GET['search'];
+    $products = $db->searchProducts($searchTerm);
+} else {
+    $products = $db->getRandomProduct(9);
 }
-else{
-}*/
 
+$pageParams["products"] = $products;
+$pageParams["nome"] = "../pages/viewProducts.php";
 require '../pages/base.php';
 ?>

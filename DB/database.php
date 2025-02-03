@@ -50,5 +50,24 @@ class DataBase{
         return $this->db;
     }
 
+    public function searchProducts($keyword) {
+        $query = $this->db->prepare("SELECT id, nome, immagine, prezzo, disponibilita, descrizione FROM prodotti WHERE nome LIKE ? OR descrizione LIKE ?");
+        if (!$query) {
+            die("Errore nella preparazione della query: " . $this->db->error);
+        }
+        $searchTerm = "%".$keyword."%";
+        $query->bind_param("ss", $searchTerm, $searchTerm);
+        $query->execute();
+        
+        $result = $query->get_result();
+        
+        if (!$result) {
+            die("Errore nell'esecuzione della query: " . $query->error);
+        }
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+
 }
 ?>

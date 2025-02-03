@@ -17,7 +17,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                     <div class="card-body">
                         <h5 class="card-title">Acquista Prodotti</h5>
                         <p class="card-text">Sfoglia e acquista i prodotti messi in vendita dai tuoi colleghi.</p>
-                        <a href="shop.html" class="btn btn-primary">Vai allo Shop</a>
+                        <a href="../php/shop.php" class="btn btn-primary">Vai allo Shop</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                     <div class="card-body">
                         <h5 class="card-title">Carrello</h5>
                         <p class="card-text">Visualizza e gestisci gli articoli presenti nel tuo carrello.</p>
-                        <a href="cart.html" class="btn btn-primary">Vai al Carrello</a>
+                        <a href="../php/cart.php" class="btn btn-primary">Vai al Carrello</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                     <div class="card-body">
                         <h5 class="card-title">Storico Acquisti</h5>
                         <p class="card-text">Controlla i tuoi ordini e acquisti passati.</p>
-                        <a href="purchase_history.php" class="btn btn-primary">Visualizza Storico</a>
+                        <a href="../php/purchaseHistory.php" class="btn btn-primary">Visualizza Storico</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                     <div class="card-body">
                         <h5 class="card-title">Gestisci Prodotti</h5>
                         <p class="card-text">Visualizza, modifica o rimuovi i prodotti che hai messo in vendita.</p>
-                        <a href="manage_products.php" class="btn btn-primary">Gestisci Prodotti</a>
+                        <a href="../php/manageProducts.php" class="btn btn-primary">Gestisci Prodotti</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                     <div class="card-body">
                         <h5 class="card-title">Aggiungi Prodotto</h5>
                         <p class="card-text">Inserisci nuovi prodotti da vendere sul sito.</p>
-                        <a href="add_product.php" class="btn btn-primary">Aggiungi Prodotto</a>
+                        <a href="../php/addProduct.php" class="btn btn-primary">Aggiungi Prodotto</a>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                     <div class="card-body">
                         <h5 class="card-title">Storico Vendite</h5>
                         <p class="card-text">Consulta lo storico delle tue vendite e le relative transazioni.</p>
-                        <a href="sales_history.php" class="btn btn-primary">Visualizza Storico</a>
+                        <a href="../php/salesHistory.php" class="btn btn-primary">Visualizza Storico</a>
                     </div>
                 </div>
             </div>
