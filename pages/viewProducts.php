@@ -24,7 +24,6 @@
                         </div>
                     </footer>
 
-                    <!-- Bottone per aggiungere al carrello -->
                     <div class="mt-2">
                         <button class="btn btn-outline-success w-100" onclick="addToCart(<?php echo (int)$prod['id']; ?>)">Aggiungi al carrello</button>
                     </div>
@@ -55,7 +54,8 @@
     function addToCart(prodId) {
         const qtyElem = document.getElementById("quantity-" + prodId);
         const qty = parseInt(qtyElem.textContent);
-        alert("Aggiunto al carrello: prodotto ID " + prodId + " con quantità: " + qty);
+        // Reindirizza alla pagina addToCart.php, passando ID prodotto e quantità tramite query string
+        window.location.href = "../php/addToCart.php?id=" + prodId + "&quantity=" + qty;
     }
 </script>
 

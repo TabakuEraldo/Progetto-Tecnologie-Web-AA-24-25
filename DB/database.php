@@ -46,5 +46,9 @@ class DataBase{
         return $stmt->execute();
     }
 
+    public function getConnection(){
+        return $this->db;
+    }
+
 }
 ?>
