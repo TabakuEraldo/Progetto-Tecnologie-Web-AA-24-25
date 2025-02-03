@@ -25,7 +25,7 @@ $stmt->close();
 
 $cartItems = [];
 if ($cartId !== null) {
-    $sql = "SELECT pic.id AS cart_item_id, p.id AS product_id, p.nome, p.immagine, p.prezzo, p.descrizione, pic.quantita
+    $sql = "SELECT pic.id AS cart_item_id, p.id AS product_id, p.nome, p.immagine, p.prezzo, p.descrizione, pic.quantita, p.disponibilita
             FROM ProdottiInCarrello pic
             INNER JOIN Prodotti p ON pic.id_Prodotto = p.id
             WHERE pic.id_Carrello = ?";
@@ -72,7 +72,10 @@ $conn->close();
                     <td>
                         <div class="input-group input-group-sm">
                             <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, -1)">-</button>
-                            <input type="text" class="form-control text-center" id="quantity-<?php echo $item['cart_item_id']; ?>" value="<?php echo $item['quantita']; ?>" readonly>
+                            <input type="number" class="form-control text-center" id="quantity-<?php echo $item['cart_item_id']; ?>"
+                                   value="<?php echo $item['quantita']; ?>"
+                                   data-available-qty="<?php echo $item['disponibilita']; ?>" min="1" 
+                                   max="<?php echo $item['disponibilita']; ?>" readonly>
                             <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, 1)">+</button>
                         </div>
                     </td>
@@ -96,25 +99,37 @@ $conn->close();
 </div>
 
 <script>
-    function updateQuantity(cartItemId, change) {
-        let qtyElem = document.getElementById("quantity-" + cartItemId);
-        let currentQty = parseInt(qtyElem.value);
+function updateQuantity(cartItemId, change) {
+    let qtyElem = document.getElementById("quantity-" + cartItemId);
+    let currentQty = parseInt(qtyElem.value);
 
-        if (currentQty + change >= 1) {
-            fetch("../php/updateCart.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: "cart_item_id=" + cartItemId + "&quantity=" + (currentQty + change)
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data === "success") {
-                    qtyElem.value = currentQty + change;
-                    location.reload(); // Ricarica la pagina per aggiornare il totale
-                } else {
-                    alert("Errore nell'aggiornamento della quantità.");
-                }
-            });
-        }
+    // Recupera la disponibilità massima del prodotto dal database
+    let availableQty = parseInt(qtyElem.getAttribute('data-available-qty')); // Impostato nel codice HTML
+
+    // Verifica che la quantità selezionata non superi la disponibilità
+    if (currentQty + change >= 1 && currentQty + change <= availableQty) {
+        fetch("../php/updateCart.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "cart_item_id=" + cartItemId + "&quantity=" + (currentQty + change)
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data); // Stampa la risposta del server nel console log
+            if (data === "success") {
+                qtyElem.value = currentQty + change;
+                location.reload(); // Ricarica la pagina per aggiornare il totale
+            } else {
+                alert("Errore nell'aggiornamento della quantità. Risposta: " + data);
+            }
+        })
+        .catch(error => {
+            console.error("Errore nella richiesta:", error);
+            alert("Si è verificato un errore nella richiesta.");
+        });
+    } else {
+        alert("La quantità richiesta supera la disponibilità del prodotto.");
     }
+}
+
 </script>

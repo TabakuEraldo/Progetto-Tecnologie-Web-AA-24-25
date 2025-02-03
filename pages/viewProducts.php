@@ -36,18 +36,41 @@
 </div>
 
 <script>
+    // Memorizza la disponibilità di ogni prodotto in un oggetto (devi passare questa info dal PHP)
+    let productStock = {
+        <?php foreach ($pageParams["products"] as $prod): ?>
+            <?php echo (int)$prod['id']; ?>: <?php echo (int)$prod['disponibilita']; ?>,
+        <?php endforeach; ?>
+    };
+
     function decreaseQuantity(prodId) {
         const qtyElem = document.getElementById("quantity-" + prodId);
+        const increaseBtn = document.getElementById("increase-" + prodId);
         let qty = parseInt(qtyElem.textContent);
+
         if (qty > 1) {
             qtyElem.textContent = qty - 1;
+        }
+
+        // Riabilita il pulsante + se è stato disabilitato
+        if (qty - 1 < productStock[prodId]) {
+            increaseBtn.disabled = false;
         }
     }
 
     function increaseQuantity(prodId) {
         const qtyElem = document.getElementById("quantity-" + prodId);
+        const increaseBtn = document.getElementById("increase-" + prodId);
         let qty = parseInt(qtyElem.textContent);
-        qtyElem.textContent = qty + 1;
+
+        if (qty < productStock[prodId]) {
+            qtyElem.textContent = qty + 1;
+        }
+
+        // Disabilita il pulsante + se si raggiunge il limite
+        if (qty + 1 >= productStock[prodId]) {
+            increaseBtn.disabled = true;
+        }
     }
 
     function addToCart(prodId) {
