@@ -5,9 +5,9 @@
         <?php foreach($pageParams["notifiche"] as $not): ?>
             <tr>
                 <?php if($not["isLetto"] == 0):?>
-                    <th scope="row"><strong><?php echo $not["titolo"]?></strong></th>
+                    <td><strong><?php echo $not["titolo"]?></strong></td>
                 <?php else: ?>
-                    <th scope="row"><?php echo $not["titolo"]?></th>
+                    <td><?php echo $not["titolo"]?></td>
                 <?php endif; ?>
                 <td class="text-end"><a href=#>leggi</a></td>
             </tr>
