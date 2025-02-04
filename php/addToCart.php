@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Crea un'istanza della classe DataBase e ottieni la connessione
+// Crea un'istanza del database
 $db = new DataBase("localhost", "root", "", "ECommerceDB");
 $conn = $db->getConnection();
 
@@ -16,12 +16,13 @@ $userId = $_SESSION['user_id'];
 $productId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1;
 
+// Controllo parametri validi
 if ($productId <= 0 || $quantity <= 0) {
     header("Location: ../pages/viewProducts.php?error=invalid_parameters");
     exit();
 }
 
-// Verifica la disponibilità del prodotto
+// Controllo disponibilità del prodotto
 $stmt = $conn->prepare("SELECT disponibilita FROM Prodotti WHERE id = ?");
 $stmt->bind_param("i", $productId);
 $stmt->execute();
@@ -34,19 +35,20 @@ if ($result->num_rows == 0) {
 $product = $result->fetch_assoc();
 $stmt->close();
 
+// Controllo se la quantità richiesta supera la disponibilità
 if ($quantity > $product['disponibilita']) {
     header("Location: ../pages/viewProducts.php?error=exceeds_availability");
     exit();
 }
 
-// Verifica se l'utente ha già un carrello
+// Recupero o creazione del carrello
 $stmt = $conn->prepare("SELECT id FROM Carrelli WHERE id_Utente = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $stmt->store_result();
+
 if ($stmt->num_rows == 0) {
     $stmt->close();
-    // Crea un nuovo carrello per l'utente in caso non ce l'abbia
     $stmt = $conn->prepare("INSERT INTO Carrelli (id_Utente) VALUES (?)");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
@@ -58,20 +60,23 @@ if ($stmt->num_rows == 0) {
     $stmt->close();
 }
 
-// Verifica se il prodotto è già presente nel carrello
+// Verifica se il prodotto è già nel carrello
 $stmt = $conn->prepare("SELECT id, quantita FROM ProdottiInCarrello WHERE id_Carrello = ? AND id_Prodotto = ?");
 $stmt->bind_param("ii", $cartId, $productId);
 $stmt->execute();
 $stmt->store_result();
+
 if ($stmt->num_rows > 0) {
     $stmt->bind_result($cartItemId, $existingQuantity);
     $stmt->fetch();
     $stmt->close();
+
     $newQuantity = $existingQuantity + $quantity;
     if ($newQuantity > $product['disponibilita']) {
         header("Location: ../pages/viewProducts.php?error=exceeds_availability");
         exit();
     }
+
     $stmt = $conn->prepare("UPDATE ProdottiInCarrello SET quantita = ? WHERE id = ?");
     $stmt->bind_param("ii", $newQuantity, $cartItemId);
     $stmt->execute();
@@ -84,7 +89,8 @@ if ($stmt->num_rows > 0) {
     $stmt->close();
 }
 
+// Chiudi la connessione e reindirizza al carrello
 $conn->close();
-header("Location: cart.php?success=1");
+header("Location: ../pages/cart.php?success=1");
 exit();
 ?>

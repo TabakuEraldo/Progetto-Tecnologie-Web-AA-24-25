@@ -1,4 +1,3 @@
-
 <div class="container mt-5">
     <h2>Checkout</h2>
     <div class="alert alert-success">Il tuo acquisto è stato completato con successo!</div>

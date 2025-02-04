@@ -28,7 +28,8 @@ if ($cartId !== null) {
     $sql = "SELECT pic.id AS cart_item_id, p.id AS product_id, p.nome, p.immagine, p.prezzo, p.descrizione, pic.quantita, p.disponibilita
             FROM ProdottiInCarrello pic
             INNER JOIN Prodotti p ON pic.id_Prodotto = p.id
-            WHERE pic.id_Carrello = ?";
+            WHERE pic.id_Carrello = ?
+            AND p.disponibilita > 0";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $cartId);
     $stmt->execute();
@@ -94,7 +95,7 @@ $conn->close();
                 </tr>
             </tfoot>
         </table>
-        <a href="checkout.php" class="btn btn-primary">Procedi al Checkout</a>
+        <a href="../php/checkout.php" class="btn btn-primary">Procedi al Checkout</a>
     <?php endif; ?>
 </div>
 
@@ -104,7 +105,7 @@ function updateQuantity(cartItemId, change) {
     let currentQty = parseInt(qtyElem.value);
 
     // Recupera la disponibilità massima del prodotto dal database
-    let availableQty = parseInt(qtyElem.getAttribute('data-available-qty')); // Impostato nel codice HTML
+    let availableQty = parseInt(qtyElem.getAttribute('data-available-qty'));
 
     // Verifica che la quantità selezionata non superi la disponibilità
     if (currentQty + change >= 1 && currentQty + change <= availableQty) {

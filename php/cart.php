@@ -32,7 +32,8 @@ if ($cartId !== null) {
     $sql = "SELECT pic.id AS cart_item_id, p.id AS product_id, p.nome, p.immagine, p.prezzo, p.descrizione, p.disponibilita, pic.quantita
             FROM ProdottiInCarrello pic
             INNER JOIN Prodotti p ON pic.id_Prodotto = p.id
-            WHERE pic.id_Carrello = ?";
+            WHERE pic.id_Carrello = ?
+            AND p.disponibilita > 0";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $cartId);
     $stmt->execute();
