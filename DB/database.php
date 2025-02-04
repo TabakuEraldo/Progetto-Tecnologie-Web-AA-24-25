@@ -69,7 +69,29 @@ class DataBase{
     }
 
     public function getNotification($userID, $userRole) {
-       
+        if($userRole == "buyer"){
+            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NOT NULL");
+            $query->bind_param("i", $userID);
+            $query->execute();
+            $result = $query->get_result();
+            if (!$result) {
+                die("Errore nell'esecuzione della query: " . $query->error);
+            }
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        else if($userRole == "seller"){
+            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NULL");
+            $query->bind_param("i", $userID);
+            $query->execute();
+            $result = $query->get_result();
+            if (!$result) {
+                die("Errore nell'esecuzione della query: " . $query->error);
+            }
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        else{
+            die("Errore nel ruolo");
+        }
     }
 }
 ?>
