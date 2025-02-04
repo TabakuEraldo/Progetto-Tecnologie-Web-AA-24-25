@@ -70,7 +70,7 @@ class DataBase{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getNotification($userID, $userRole) {
+    public function getNotifications($userID, $userRole) {
         if($userRole == "buyer"){
             $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NOT NULL");
             $query->bind_param("i", $userID);
@@ -94,6 +94,17 @@ class DataBase{
         else{
             die("Errore nel ruolo");
         }
+    }
+
+    public function readNotification($id) {
+        $query = $this->db->prepare("SELECT * FROM notifiche WHERE id = ?");
+        $query->bind_param("i", $id);
+        $query->execute();
+        $result = $query->get_result()->fetch_assoc();
+        $query = $this->db->prepare("UPDATE `ecommercedb`.`notifiche` SET `isLetto` = '1' WHERE (`id` = ?);");
+        $query->bind_param("i", $id);
+        $query->execute();
+        return $result;
     }
 }
 ?>

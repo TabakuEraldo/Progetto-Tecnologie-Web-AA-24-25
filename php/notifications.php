@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$pageParams["notifiche"] = $db->getNotification($_SESSION['user_id'], $_SESSION['user_role']);
-$pageParams["nome"] = "../pages/viewNotification.php";
+$pageParams["notifiche"] = $db->getNotifications($_SESSION['user_id'], $_SESSION['user_role']);
+$pageParams["nome"] = "../pages/viewNotifications.php";
 require "../pages/base.php";
 ?>
