@@ -1,6 +1,4 @@
-<div class="container mt-5">
-    <h2 class="text-center">Risultati della ricerca</h2>
-    
+<div class="container mt-5 py-5"> 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php if (!empty($pageParams["products"])): ?>
             <?php foreach($pageParams["products"] as $prod): ?>
