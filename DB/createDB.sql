@@ -46,6 +46,7 @@ CREATE TABLE ProdottiInCarrello (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_Carrello INT NOT NULL,
     id_Prodotto INT NOT NULL,
+    quantita INT NOT NULL DEFAULT 1,
     FOREIGN KEY (id_Carrello) REFERENCES Carrelli(id) ON DELETE CASCADE,
     FOREIGN KEY (id_Prodotto) REFERENCES Prodotti(id) ON DELETE CASCADE
 );
@@ -60,6 +61,7 @@ CREATE TABLE AcquistoProdotti (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_Acquisto INT NOT NULL,
     id_Prodotto INT NOT NULL,
+    quantita INT NOT NULL DEFAULT 1,
     FOREIGN KEY (id_Acquisto) REFERENCES Acquisti(id) ON DELETE CASCADE,
     FOREIGN KEY (id_Prodotto) REFERENCES Prodotti(id) ON DELETE CASCADE
 );
@@ -74,6 +76,7 @@ CREATE TABLE VenditaProdotti (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_Vendita INT NOT NULL,
     id_Prodotto INT NOT NULL,
+    quantita INT NOT NULL DEFAULT 1,
     FOREIGN KEY (id_Vendita) REFERENCES Vendite(id) ON DELETE CASCADE,
     FOREIGN KEY (id_Prodotto) REFERENCES Prodotti(id) ON DELETE CASCADE
 );

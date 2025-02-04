@@ -67,7 +67,9 @@ class DataBase{
     
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
 
+    public function getNotification($userID, $userRole) {
+       
+    }
 }
 ?>
