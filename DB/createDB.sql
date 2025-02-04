@@ -7,13 +7,16 @@ CREATE TABLE Utenti (
     email VARCHAR(255) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     cognome VARCHAR(255) NOT NULL,
+    indirizzo VARCHAR(1024) NOT NULL,
+    imgProfilo VARCHAR(4906),
     password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Prodotti (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255),
-    immagine VARCHAR(255),
+    nome VARCHAR(255) NOT NULL,
+    immagine VARCHAR(4096) NOT NULL,
+    categoria VARCHAR(255) NOT NULL,
     prezzo DECIMAL(6, 2) NOT NULL,
     descrizione VARCHAR(1000),
     disponibilita INT NOT NULL
@@ -77,7 +80,9 @@ CREATE TABLE VenditaProdotti (
 
 CREATE TABLE Notifiche (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    testo VARCHAR(4096),
+    titolo VARCHAR(255) NOT NULL,
+    testo VARCHAR(4096) NOT NULL,
+    isLetto BOOLEAN DEFAULT 0,
     id_Utente INT NOT NULL,
     id_Vendita INT,
     id_Prodotto INT,
