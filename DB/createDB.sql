@@ -13,6 +13,7 @@ CREATE TABLE Utenti (
 CREATE TABLE Prodotti (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255),
+    categoria VARCHAR(255),
     immagine VARCHAR(255),
     prezzo DECIMAL(6, 2) NOT NULL,
     descrizione VARCHAR(1000),
@@ -77,6 +78,8 @@ CREATE TABLE VenditaProdotti (
 
 CREATE TABLE Notifiche (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    titolo VARCHAR(255),
+    isLetta BOOLEAN DEFAULT 0,
     testo VARCHAR(4096),
     id_Utente INT NOT NULL,
     id_Vendita INT,
