@@ -106,5 +106,19 @@ class DataBase{
         $query->execute();
         return $result;
     }
+
+    public function getListino($userId) {
+        $query = $this->db->prepare("SELECT prodotti.* FROM listini JOIN prodottiinlistino ON listini.id = prodottiinlistino.id_listino JOIN prodotti ON prodottiinlistino.id_prodotto = prodotti.id WHERE listini.id_utente = ? ORDER BY disponibilita DESC");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        return $query->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProdotto($prodId) {
+        $query = $this->db->prepare("SELECT * FROM prodotti WHERE id = ?");
+        $query->bind_param("i", $prodId);
+        $query->execute();
+        return $query->get_result()->fetch_assoc();
+    }
 }
 ?>
