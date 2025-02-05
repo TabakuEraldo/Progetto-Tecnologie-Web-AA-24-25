@@ -160,31 +160,17 @@ class DataBase{
     }
 
     public function getStoricoVendite($userId) {
-        $query = $this->db->prepare("SELECT id FROM ecommercedb.vendite WHERE id_Utente = ?;");
+        $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto JOIN vendite ON venditaprodotti.id_Vendita = vendite.id WHERE vendite.id_Utente = ? ORDER BY venditaprodotti.id DESC;");
         $query->bind_param("i", $userId);
         $query->execute();
-        $idVendite = $query->get_result()->fetch_assoc();
-        if($idVendite != null){
-            $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto WHERE id_Vendita = ? ORDER BY venditaprodotti.id DESC;");
-            $query->bind_param("i", $idVendite);
-            $query->execute();
-            return $query->get_result()->fetch_all(MYSQLI_ASSOC);
-        }
-        return false;
+        return $query->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getStoricoAcquisti($userId) {
-        $query = $this->db->prepare("SELECT id FROM ecommercedb.acquisti WHERE id_Utente = ?;");
+        $query = $this->db->prepare("SELECT acquistoprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.acquistoprodotti JOIN prodotti ON prodotti.id = acquistoprodotti.id_Prodotto JOIN acquisti ON acquisti.id = acquistoprodotti.id_Acquisto WHERE acquisti.id_Utente = ? ORDER BY acquistoprodotti.id DESC;");
         $query->bind_param("i", $userId);
         $query->execute();
-        $idAcquisti = $query->get_result()->fetch_assoc();
-        if($idAcquisti != null){
-            $query = $this->db->prepare("SELECT acquistoprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.acquistoprodotti JOIN prodotti ON prodotti.id = acquistoprodotti.id_Prodotto WHERE id_Acquisto = ? ORDER BY acquistoprodotti.id DESC;");
-            $query->bind_param("i", $idAcquisti);
-            $query->execute();
-            return $query->get_result()->fetch_all(MYSQLI_ASSOC);
-        }
-        return false;
+        return $query->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getVenditoreByIdProdotto($idProdotto) {

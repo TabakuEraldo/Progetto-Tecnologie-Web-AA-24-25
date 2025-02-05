@@ -63,7 +63,7 @@ if ($userId) {
                             <div class="card-body">
                                 <h5 class="card-title">Storico Acquisti</h5>
                                 <p class="card-text">Consulta i tuoi acquisti passati.</p>
-                                <a href="../php/purchaseHistory.php" class="btn btn-primary btn-sm">Visualizza Storico</a>
+                                <a href="../php/storicoAcquisti.php" class="btn btn-primary btn-sm">Visualizza Storico</a>
                             </div>
                         </div>
                     </div>
