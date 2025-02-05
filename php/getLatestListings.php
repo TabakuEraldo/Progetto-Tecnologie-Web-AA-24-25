@@ -5,7 +5,7 @@ $db = new DataBase("localhost", "root", "", "ecommercedb");
 $conn = $db->getConnection();
 
 // Recupera gli ultimi 6 prodotti aggiunti
-$sql = "SELECT id, nome, immagine, prezzo, descrizione FROM Prodotti ORDER BY ID DESC LIMIT 3";
+$sql = "SELECT id, nome, immagine, prezzo, descrizione FROM Prodotti WHERE disponibilita>0 ORDER BY ID DESC LIMIT 3";
 $result = $conn->query($sql);
 
 $products = [];

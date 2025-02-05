@@ -1,7 +1,10 @@
 <?php
 require_once("start.php");
 
-$pageParams["titolo"] = "Student Market";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $pageParams["nome"] = "intro.php";
 
 require '../pages/base.php';

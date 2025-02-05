@@ -136,7 +136,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">${item.nome}</h5>
                                     <p class="card-text">€${item.prezzo}</p>
-                                    <a href="product.php?id=${item.id}" class="btn btn-primary">Vedi Prodotto</a>
+                                    <a href="shop.php" class="btn btn-primary">Vai allo shop</a>
                                 </div>
                             </div>
                         </div>`;
