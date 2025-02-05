@@ -32,7 +32,7 @@ if ($stmt->num_rows == 0) {
 
 // Recupera gli articoli nel carrello
 $stmt = $conn->prepare("
-    SELECT pic.id_Prodotto, pic.quantita, p.disponibilita 
+    SELECT pic.id_Prodotto, pic.quantita, p.disponibilita, p.nome
     FROM ProdottiInCarrello pic 
     INNER JOIN Prodotti p ON pic.id_Prodotto = p.id 
     WHERE pic.id_Carrello = ?");
@@ -100,6 +100,24 @@ try {
 
     // **Conferma la transazione**
     $conn->commit();
+
+
+    $titolo = "Acquisto ".$item["nome"];
+    $testo = "Notifica di conferma di avvenuto acquisto di ".$quantity." ".$item["nome"];
+
+    $db->notificaAcquisto($acquistoId, $titolo, $testo, $userId);
+    $idVendita = $db->addVendita($db->getVenditoreByIdProdotto($productId), $productId, $quantity);
+
+    $titolo = "Vendita ".$item["nome"];
+    $testo = "Notifica di conferma di avvenuta vendita di ".$quantity." ".$item["nome"];
+    $db->notificaVendita($idVendita, $titolo, $testo, $db->getVenditoreByIdProdotto($productId));
+
+    if($newStock == 0){
+        $titolo = "Esaurito ".$item["nome"];
+        $testo = "Il tuo prodotto: ".$item["nome"]." è esaurito";
+        $db->notificaFineProdotto($productId, $titolo, $testo, $db->getVenditoreByIdProdotto($productId));
+    }
+
     $conn->close();
 
     // **Reindirizza alla pagina di successo**
