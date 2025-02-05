@@ -1,16 +1,34 @@
 <?php 
-$userName = $_SESSION['user_name'] ?? 'Utente';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); 
+}
+require_once '../DB/database.php';
+
+$db = new DataBase('localhost', 'root', '', 'ecommercedb'); 
+
+$userId = $_SESSION['user_id'] ?? null;
 $userEmail = $_SESSION['user_email'] ?? 'Email non disponibile';
 $userRole = $_SESSION['user_role'] ?? null;
+$userName = $_SESSION['user_name'] ?? 'Utente';
+
+if ($userId) {
+    $result = $db->login($userEmail);
+    $userData = $result->fetch_assoc();
+    $profileImage = $userData['imgProfilo'] ?? '../img/default.png';  
+} else {
+    $profileImage = '../img/default.png';
+}
+
 ?>
 
 <div class="container mt-5">
     <div class="card text-center mb-4">
         <div class="card-body">
-            <img src="../img/default-avatar.png" alt="Foto Profilo" class="rounded-circle mb-3" width="100">
+            <!-- Visualizzazione dell'immagine del profilo -->
+            <img src="../img/<?php echo htmlspecialchars($profileImage); ?>" alt="Foto Profilo" class="profile-img mb-3">
             <h4><?php echo htmlspecialchars($userName); ?></h4>
             <p class="text-muted"><?php echo htmlspecialchars($userEmail); ?></p>
-            <p><strong>Account</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
+            <p><strong>Account:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
             <a href="edit_profile.php" class="btn btn-secondary btn-sm">Modifica Profilo</a>
             <a href="../php/logout.php" class="btn btn-danger btn-sm">Logout</a>
         </div>
@@ -21,6 +39,7 @@ $userRole = $_SESSION['user_role'] ?? null;
             <h2 class="text-center mb-3">Dashboard</h2>
             <div class="row">
                 <?php if ($userRole == 'buyer'): ?>
+                    <!-- Se l'utente è un compratore -->
                     <div class="col-md-4">
                         <div class="card mb-3 text-center">
                             <div class="card-body">
@@ -49,6 +68,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                         </div>
                     </div>
                 <?php elseif ($userRole == 'seller'): ?>
+                    <!-- Se l'utente è un venditore -->
                     <div class="col-md-4">
                         <div class="card mb-3 text-center">
                             <div class="card-body">

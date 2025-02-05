@@ -110,3 +110,11 @@
         background-color: #BB2E29;
         color: white;
     }
+
+    .profile-img {
+        width: 350px;  /* Imposta la larghezza desiderata */
+        height: 350px; /* Imposta l'altezza desiderata */
+        object-fit: cover; /* L'immagine riempie l'area senza distorsioni */
+        border-radius: 50%; /* Per mantenere l'immagine rotonda */
+    }
+    

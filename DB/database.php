@@ -39,15 +39,17 @@ class DataBase{
         return $stmt->num_rows;
     }
 
-    public function registration($nome, $cognome, $email, $hashPass){
-        $nome = $this->db->real_escape_string($nome);
-        $cognome = $this->db->real_escape_string($cognome);
-        $sql = "INSERT INTO `ecommercedb`.`utenti` (`email`, `nome`, `cognome`, `password`) VALUES (?, ?, ?, ?);";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("ssss", $email, $nome, $cognome, $hashPass);
-        return $stmt->execute();
+    public function registration($nome, $cognome, $email, $hashedPassword, $profileImage) {
+        $stmt = $this->db->prepare("INSERT INTO utenti (nome, cognome, email, password, imgProfilo) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $nome, $cognome, $email, $hashedPassword, $profileImage);  
+        
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     public function getConnection(){
         return $this->db;
     }
@@ -130,22 +132,33 @@ class DataBase{
     public function addProdotto($nome, $prezzo, $categoria, $quantita, $descrizione, $img, $userid) {
         $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodotti` (`nome`, `immagine`, `categoria`, `prezzo`, `descrizione`, `disponibilita`) VALUES (?, ?, ?, ?, ?, ?);");
         $query->bind_param("sssdsi", $nome, $img, $categoria, $prezzo, $descrizione, $quantita);
-        if($query->execute()){
+    
+        if ($query->execute()) {
             $prodId = $this->db->insert_id;
             $query = $this->db->prepare("SELECT id FROM ecommercedb.listini WHERE id_Utente = ?");
             $query->bind_param("i", $userid);
             $query->execute();
-            $listId = $query->get_result()->fetch_assoc();
-            if($listId != null){
+            $result = $query->get_result();
+            $listRow = $result->fetch_assoc(); 
+            if ($listRow) {
+                $listId = $listRow['id'];
                 $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`) VALUES (?, ?);");
                 $query->bind_param("ii", $listId, $prodId);
                 return $query->execute();
+            } else {
+                $query = $this->db->prepare("INSERT INTO `ecommercedb`.`listini` (`id_Utente`) VALUES (?);");
+                $query->bind_param("i", $userid);
+                if ($query->execute()) {
+                    $listId = $this->db->insert_id;
+                    $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`) VALUES (?, ?);");
+                    $query->bind_param("ii", $listId, $prodId);
+                    return $query->execute();
+                }
             }
-            return false;
         }
         return false;
     }
-
+    
     public function storicoVendite($userId) {
         $query = $this->db->prepare("SELECT id FROM ecommercedb.vendite WHERE id_Utente = ?;");
         $query->bind_param("i", $userId);
@@ -159,5 +172,6 @@ class DataBase{
         }
         return false;
     }
+
 }
 ?>

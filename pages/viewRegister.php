@@ -42,16 +42,9 @@
                 </div>
             </div>
 
-            <!-- Ruolo con pulsanti regolari -->
-            <div class="mb-3 text-center">
-                <label class="form-label">Seleziona il tuo ruolo</label>
-                <div class="d-flex gap-3 justify-content-center">
-                    <input type="radio" class="btn-check" id="buyer" name="role" value="buyer" checked>
-                    <label class="role-btn" for="buyer">Compratore</label>
-
-                    <input type="radio" class="btn-check" id="seller" name="role" value="seller">
-                    <label class="role-btn" for="seller">Venditore</label>
-                </div>
+            <div class="mb-3">
+                <label for="profileImage" class="form-label">Immagine del Profilo</label>
+                <input type="file" class="form-control" id="profileImage" name="profileImage" accept="image/*">
             </div>
 
             <!-- Pulsante di registrazione -->
