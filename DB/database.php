@@ -146,7 +146,7 @@ class DataBase{
         return false;
     }
 
-    public function storicoVendite($userId) {
+    public function getStoricoVendite($userId) {
         $query = $this->db->prepare("SELECT id FROM ecommercedb.vendite WHERE id_Utente = ?;");
         $query->bind_param("i", $userId);
         $query->execute();
