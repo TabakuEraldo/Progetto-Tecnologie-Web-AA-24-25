@@ -72,7 +72,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                             <div class="card-body">
                                 <h5 class="card-title">Storico Vendite</h5>
                                 <p class="card-text">Consulta lo storico delle tue vendite.</p>
-                                <a href="../php/salesHistory.php" class="btn btn-primary btn-sm">Visualizza Storico</a>
+                                <a href="../php/storicoVendite.php" class="btn btn-primary btn-sm">Visualizza Storico</a>
                             </div>
                         </div>
                     </div>

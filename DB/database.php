@@ -145,5 +145,19 @@ class DataBase{
         }
         return false;
     }
+
+    public function storicoVendite($userId) {
+        $query = $this->db->prepare("SELECT id FROM ecommercedb.vendite WHERE id_Utente = ?;");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        $idVendite = $query->get_result()->fetch_assoc();
+        if($idVendite != null){
+            $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto WHERE id_Vendita = ?;");
+            $query->bind_param("i", $idVendite);
+            $query->execute();
+            return $query->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+        return false;
+    }
 }
 ?>
