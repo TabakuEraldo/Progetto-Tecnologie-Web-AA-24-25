@@ -1,8 +1,7 @@
-
 .navbar-custom .offcanvas-body,
 .navbar-custom .offcanvas-title,
 .navbar-custom .offcanvas-end {
-        background-color: #BB2E29;
+        background-color: #A5C279;
         backdrop-filter: blur(10px);
 }
 
@@ -11,7 +10,7 @@
 }
 
 .navbar-custom{
-    background-color: #BB2E29;
+    background-color: #A5C279;
 }
 
 
@@ -31,9 +30,6 @@
     margin-bottom: 10px;
 }
 
-
-
-/* Stile per le card */
 .card {
     border-radius: 10px;
     overflow: hidden;
@@ -56,7 +52,6 @@
     padding: 10px 15px;
 }
 
-/* Stile per il selettore quantità */
 .btn-group .btn {
     width: 50px;
     text-align: center;
@@ -76,7 +71,6 @@
     padding: 0.375rem 1rem;
 }
 
-/* Assicura un buon distanziamento delle card */
 .row.g-4 {
     margin-left: 0;
     margin-right: 0;
@@ -92,22 +86,22 @@
         width: 120px;
         padding: 10px;
         text-align: center;
-        border: 2px solid #BB2E29;
+        border: 2px solid #A5C279;
         border-radius: 8px; 
         font-weight: bold;
         cursor: pointer;
         transition: 0.3s;
         background-color: #f8f9fa;
-        color: #BB2E29;
+        color: #B0C4B1;
 }
 
     .btn-check:checked + .role-btn {
-        background-color: #BB2E29;
-        color: white;
+        background-color: #A5C279;
+        color: #A5C279;
     }
 
     .role-btn:hover {
-        background-color: #BB2E29;
+        background-color: #275e2a;
         color: white;
     }
 
@@ -119,22 +113,22 @@
     }
 
 header.bg-primary {
-    background-color: #004C97 !important;
+    background-color: #A5C279!important;
 }
 
 .card.p-4.shadow {
-    background-color: #004C97 !important;
+    background-color: #A5C279 !important;
     color: white !important;
     border: none;
     transition: background-color 0.3s ease-in-out;
 }
 
 .card.p-4.shadow:hover {
-    background-color: #A12622 !important;
+    background-color: #A5C279 !important;
 }
 
 footer.bg-dark {
-    background-color: #BB2E29 !important;
+    background-color: #A5C279 !important;
     color: white !important;
 }
 
@@ -151,7 +145,7 @@ footer a.text-white-50:hover {
 }
 
 #themeToggle:hover {
-    background-color: #BB2E29;
+    background-color: #A5C279;
     color: #fff;
 }
 
@@ -171,25 +165,24 @@ footer a {
 }
 
 footer a:hover {
-    color: #BB2E29;  /* Cambia il colore quando si passa sopra il link */
+    color: #B0C4B1;
 }
 
 footer h5 {
     font-weight: bold;
-    font-size: 1.1rem;  /* Ridotto il font per snellire */
+    font-size: 1.1rem;
 }
 
 footer .btn-danger {
-    background-color: #BB2E29;
-    border-color: #BB2E29;
+    background-color: #A5C279;
+    border-color: #A5C279;
 }
 
 footer .btn-danger:hover {
-    background-color: #9b2422;
-    border-color: #9b2422;
+    background-color: #A5C279;
+    border-color: #A5C279;
 }
 
-/* Modifica per le piccole schermate */
 @media (max-width: 768px) {
     footer .col-md-4 {
         text-align: center;

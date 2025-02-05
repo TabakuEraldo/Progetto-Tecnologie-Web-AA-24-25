@@ -38,9 +38,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="cart.php">Carrello</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="notifications.php">Notifiche</a>
-                </li>
                 <button class="btn btn-outline-light ms-3" id="themeToggle" title="Cambia Tema">
                 <i class="bi bi-sun" id="themeIcon"></i>
                 </button>
@@ -59,7 +56,6 @@
     <footer class="bg-dark text-white py-3 mt-auto">
     <div class="container">
         <div class="row">
-            <!-- Colonna StudentMarket -->
             <div class="col-md-4 col-sm-6 mb-3">
                 <h5 class="text-white mb-2">StudentMarket</h5>
                 <ul class="list-unstyled">
@@ -68,8 +64,6 @@
                     <li><a href="../php/cart.php" class="text-white-50">Carrello</a></li>
                 </ul>
             </div>
-
-            <!-- Colonna Supporto -->
             <div class="col-md-4 col-sm-6 mb-3">
                 <h5 class="text-white mb-2">Supporto</h5>
                 <ul class="list-unstyled">
@@ -78,8 +72,6 @@
                     <li><a href="#" class="text-white-50">Spedizioni</a></li>
                 </ul>
             </div>
-
-            <!-- Colonna Seguici -->
             <div class="col-md-4 col-sm-6 mb-3">
                 <h5 class="text-white mb-2">Seguici</h5>
                 <ul class="list-unstyled d-flex gap-3">
@@ -89,10 +81,8 @@
                 </ul>
             </div>
         </div>
-
-        <!-- Copyright -->
         <div class="text-center mt-3">
-            <small>&copy; 2024 StudentMarket. Tutti i diritti riservati.</small>
+            <small>&copy; 2025 StudentMarket. Tutti i diritti riservati.</small>
         </div>
     </div>
 </footer>
@@ -103,23 +93,16 @@
         const themeIcon = document.getElementById("themeIcon");
         const htmlElement = document.documentElement;
         const storedTheme = localStorage.getItem("theme") || "light";
-
-        // Imposta il tema salvato (o il tema di default "light")
         htmlElement.setAttribute("data-bs-theme", storedTheme);
         updateIcon(storedTheme);
-
-        // Gestisce il click sul pulsante per cambiare il tema
         themeToggle.addEventListener("click", function () {
             let currentTheme = htmlElement.getAttribute("data-bs-theme");
             let newTheme = currentTheme === "light" ? "dark" : "light";
-
-            // Cambia il tema
             htmlElement.setAttribute("data-bs-theme", newTheme);
             localStorage.setItem("theme", newTheme);
             updateIcon(newTheme);
         });
 
-        // Funzione per aggiornare l'icona in base al tema
         function updateIcon(theme) {
             if (theme === "light") {
                 themeIcon.classList.remove("bi-sun");
@@ -133,9 +116,6 @@
         }
     });
 </script>
-
-    <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
   </body>
 </html>

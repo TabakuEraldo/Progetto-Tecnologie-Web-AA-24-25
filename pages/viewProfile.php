@@ -30,6 +30,7 @@ if ($userId) {
             <p class="text-muted"><?php echo htmlspecialchars($userEmail); ?></p>
             <p><strong>Account:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
             <a href="../php/modificaProfilo.php" class="btn btn-secondary btn-sm">Modifica Profilo</a>
+            <a href="../php/notifications.php" class="btn btn-danger btn-sm">Notifiche</a>
             <a href="../php/logout.php" class="btn btn-danger btn-sm">Logout</a>
         </div>
     </div>

@@ -13,8 +13,8 @@
                 <label for="categoria" class="form-label">Categoria</label>
                 <select class="form-select" id="categoria" name="categoria">
                     <option value="Elettronica">Elettronica</option>
-                    <option value="Abbigliamento">Abbigliamento</option>
-                    <option value="Alimentari">Alimentari</option>
+                    <option value="Usato">Usato</option>
+                    <option value="Didattica">Didattica</option>
                 </select>
             </div>
             <div class="col-md-6">
@@ -34,4 +34,18 @@
             </div>
         </form>
 </div>
+
+<script>
+    document.getElementById("prezzo").addEventListener("input", function () {
+        if (this.value < 0) {
+            this.value = 0;
+        }
+    });
+
+    document.getElementById("disponibilita").addEventListener("input", function () {
+        if (this.value < 0) {
+            this.value = 0;
+        }
+    });
+</script>
 
