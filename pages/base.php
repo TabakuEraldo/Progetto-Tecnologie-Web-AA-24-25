@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudentMarket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css"/>
     <link rel="stylesheet" href="../css/formStyle.css"/>
     </style>
@@ -12,10 +13,7 @@
   <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-custom navbar-expand-lg">
         <div class="container-fluid">
-          <!-- navbar -->
           <a class="navbar-brand" href="index.php">StudentMarket</a>
-
-          <!-- sidebar -->
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -24,12 +22,11 @@
               <h5 style="color:white">StudentMarket</h5>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-
             <div class="offcanvas-body">
-              <form class="d-flex mt-3" role="search" action="../php/shop.php" method="GET">
-                <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" id="search">
-                <button class="btn btn-outline-light" type="submit" data-bs-dismiss="offcanvas">Cerca</button>
-              </form>
+            <form class="d-flex mt-3" action="../php/shop.php" method="GET">
+            <input class="form-control me-2" type="text" placeholder="cerca..." aria-label="Search" name="search" id="search">
+            <button class="btn btn-outline-light" type="submit" data-bs-dismiss="offcanvas">Cerca</button>
+            </form>
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
                 <li class="nav-item">
@@ -44,10 +41,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="notifications.php">Notifiche</a>
                 </li>
-                  <button class="btn btn-outline-light ms-3" id="themeToggle">
-  <i class="bi bi-moon"></i>
-</button>
-
+                <button class="btn btn-outline-light ms-3" id="themeToggle" title="Cambia Tema">
+                <i class="bi bi-sun" id="themeIcon"></i>
+                </button>
               </ul>       
             </div>
           </div>
@@ -60,71 +56,82 @@
     }
     ?>
     </main>
-        <!-- Footer -->
-        <footer class="bg-dark text-white-50 mt-auto py-4">
-      <div class="container">
+    <footer class="bg-dark text-white py-3 mt-auto">
+    <div class="container">
         <div class="row">
-          
-          <!-- Navigazione -->
-          <div class="col-md-3 col-sm-6 mb-3">
-            <h5 class="text-white">StudentMarket</h5>
-            <ul class="list-unstyled">
-              <li><a href="shop.php" class="text-white-50">Compra</a></li>
-              <li><a href="sell.php" class="text-white-50">Vendi</a></li>
-              <li><a href="profile.php" class="text-white-50">Profilo</a></li>
-              <li><a href="cart.php" class="text-white-50">Carrello</a></li>
-            </ul>
-          </div>
+            <!-- Colonna StudentMarket -->
+            <div class="col-md-4 col-sm-6 mb-3">
+                <h5 class="text-white mb-2">StudentMarket</h5>
+                <ul class="list-unstyled">
+                    <li><a href="../php/shop.php" class="text-white-50">Compra</a></li>
+                    <li><a href="../php/profile.php" class="text-white-50">Profilo</a></li>
+                    <li><a href="../php/cart.php" class="text-white-50">Carrello</a></li>
+                </ul>
+            </div>
 
-          <!-- Supporto clienti -->
-          <div class="col-md-3 col-sm-6 mb-3">
-            <h5 class="text-white">Supporto</h5>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white-50">FAQ</a></li>
-              <li><a href="#" class="text-white-50">Contatti</a></li>
-              <li><a href="#" class="text-white-50">Spedizioni</a></li>
-            </ul>
-          </div>
+            <!-- Colonna Supporto -->
+            <div class="col-md-4 col-sm-6 mb-3">
+                <h5 class="text-white mb-2">Supporto</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white-50">FAQ</a></li>
+                    <li><a href="#" class="text-white-50">Contatti</a></li>
+                    <li><a href="#" class="text-white-50">Spedizioni</a></li>
+                </ul>
+            </div>
 
-          <div class="col-md-3 col-sm-6 mb-3">
-            <h5 class="text-white">Seguici</h5>
-            <ul class="list-unstyled d-flex gap-3">
-              <li><a href="#" class="text-white-50"><i class="bi bi-facebook"></i></a></li>
-              <li><a href="#" class="text-white-50"><i class="bi bi-instagram"></i></a></li>
-              <li><a href="#" class="text-white-50"><i class="bi bi-twitter"></i></a></li>
-            </ul>
-          </div>
+            <!-- Colonna Seguici -->
+            <div class="col-md-4 col-sm-6 mb-3">
+                <h5 class="text-white mb-2">Seguici</h5>
+                <ul class="list-unstyled d-flex gap-3">
+                    <li><a href="#" class="text-white-50"><i class="bi bi-facebook fs-4"></i></a></li>
+                    <li><a href="#" class="text-white-50"><i class="bi bi-instagram fs-4"></i></a></li>
+                    <li><a href="#" class="text-white-50"><i class="bi bi-twitter fs-4"></i></a></li>
+                </ul>
+            </div>
         </div>
-        <div class="text-center mt-4">
-          <small>&copy; 2024 StudentMarket. Tutti i diritti riservati.</small>
+
+        <!-- Copyright -->
+        <div class="text-center mt-3">
+            <small>&copy; 2024 StudentMarket. Tutti i diritti riservati.</small>
         </div>
-      </div>
-    </footer>
+    </div>
+</footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const themeToggle = document.getElementById("themeToggle");
-      const htmlElement = document.documentElement;
-      const storedTheme = localStorage.getItem("theme") || "light";
+    document.addEventListener("DOMContentLoaded", function () {
+        const themeToggle = document.getElementById("themeToggle");
+        const themeIcon = document.getElementById("themeIcon");
+        const htmlElement = document.documentElement;
+        const storedTheme = localStorage.getItem("theme") || "light";
 
-      htmlElement.setAttribute("data-bs-theme", storedTheme);
-      updateIcon(storedTheme);
+        // Imposta il tema salvato (o il tema di default "light")
+        htmlElement.setAttribute("data-bs-theme", storedTheme);
+        updateIcon(storedTheme);
 
-      themeToggle.addEventListener("click", function () {
-          let currentTheme = htmlElement.getAttribute("data-bs-theme");
-          let newTheme = currentTheme === "light" ? "dark" : "light";
+        // Gestisce il click sul pulsante per cambiare il tema
+        themeToggle.addEventListener("click", function () {
+            let currentTheme = htmlElement.getAttribute("data-bs-theme");
+            let newTheme = currentTheme === "light" ? "dark" : "light";
 
-          htmlElement.setAttribute("data-bs-theme", newTheme);
-          localStorage.setItem("theme", newTheme);
-          updateIcon(newTheme);
-      });
+            // Cambia il tema
+            htmlElement.setAttribute("data-bs-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            updateIcon(newTheme);
+        });
 
-      function updateIcon(theme) {
-          themeToggle.innerHTML = theme === "light" 
-              ? '<i class="bi bi-moon"></i>' 
-              : '<i class="bi bi-sun"></i>';
-      }
-  });
+        // Funzione per aggiornare l'icona in base al tema
+        function updateIcon(theme) {
+            if (theme === "light") {
+                themeIcon.classList.remove("bi-sun");
+                themeIcon.classList.add("bi-moon");
+                themeToggle.title = "Passa alla modalità notte";
+            } else {
+                themeIcon.classList.remove("bi-moon");
+                themeIcon.classList.add("bi-sun");
+                themeToggle.title = "Passa alla modalità chiara";
+            }
+        }
+    });
 </script>
 
     <!-- Bootstrap Bundle -->

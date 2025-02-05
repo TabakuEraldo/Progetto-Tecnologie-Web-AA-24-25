@@ -112,9 +112,91 @@
     }
 
     .profile-img {
-        width: 350px;  /* Imposta la larghezza desiderata */
-        height: 350px; /* Imposta l'altezza desiderata */
-        object-fit: cover; /* L'immagine riempie l'area senza distorsioni */
-        border-radius: 50%; /* Per mantenere l'immagine rotonda */
+        width: 350px; 
+        height: 350px;
+        object-fit: cover; 
+        border-radius: 50%; 
     }
-    
+
+header.bg-primary {
+    background-color: #004C97 !important;
+}
+
+.card.p-4.shadow {
+    background-color: #004C97 !important;
+    color: white !important;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card.p-4.shadow:hover {
+    background-color: #A12622 !important;
+}
+
+footer.bg-dark {
+    background-color: #BB2E29 !important;
+    color: white !important;
+}
+
+footer a.text-white-50 {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+footer a.text-white-50:hover {
+    color: white !important;
+}
+
+#themeToggle {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#themeToggle:hover {
+    background-color: #BB2E29;
+    color: #fff;
+}
+
+#themeToggle .bi {
+    font-size: 1.5rem;
+}
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+}
+
+footer a {
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #BB2E29;  /* Cambia il colore quando si passa sopra il link */
+}
+
+footer h5 {
+    font-weight: bold;
+    font-size: 1.1rem;  /* Ridotto il font per snellire */
+}
+
+footer .btn-danger {
+    background-color: #BB2E29;
+    border-color: #BB2E29;
+}
+
+footer .btn-danger:hover {
+    background-color: #9b2422;
+    border-color: #9b2422;
+}
+
+/* Modifica per le piccole schermate */
+@media (max-width: 768px) {
+    footer .col-md-4 {
+        text-align: center;
+    }
+
+    footer .list-unstyled {
+        padding-left: 0;
+        list-style: none;
+    }
+}
