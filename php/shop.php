@@ -1,6 +1,10 @@
 <?php
 require_once 'start.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $products = [];
 
 if (isset($_GET['search']) && !empty($_GET['search'])) {

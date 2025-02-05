@@ -4,7 +4,6 @@
             <?php foreach($pageParams["products"] as $prod): ?>
                 <div class="col">
                     <div class="card h-100 shadow-sm">
-                        <!-- Immagine del prodotto -->
                         <img src="<?php echo "../img/" . htmlspecialchars($prod["immagine"]); ?>" class="card-img-top" alt="Immagine del prodotto">
                         
                         <div class="card-body">
@@ -13,17 +12,22 @@
                             <p class="card-text"><strong>Prezzo: </strong><?php echo $prod["prezzo"]; ?>$</p>
                         </div>
 
-                        <!-- Selettore quantità -->
-                        <div class="card-footer">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-outline-primary" onclick="decreaseQuantity(<?php echo (int)$prod['id']; ?>)">-</button>
-                                    <span class="btn btn-outline-primary" id="quantity-<?php echo (int)$prod['id']; ?>">1</span>
-                                    <button type="button" class="btn btn-outline-primary" onclick="increaseQuantity(<?php echo (int)$prod['id']; ?>)">+</button>
+                        <?php if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] == "buyer"):?>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <?php if(isset($_SESSION['user_id']) && $_SESSION['user_role'] == "buyer"):?>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-primary" onclick="decreaseQuantity(<?php echo (int)$prod['id']; ?>)">-</button>
+                                            <span class="btn btn-outline-primary" id="quantity-<?php echo (int)$prod['id']; ?>">1</span>
+                                            <button type="button" class="btn btn-outline-primary" onclick="increaseQuantity(<?php echo (int)$prod['id']; ?>)">+</button>
+                                        </div>
+                                        <button class="btn btn-outline-success" onclick="addToCart(<?php echo (int)$prod['id']; ?>)">Aggiungi al carrello</button>
+                                    <?php else:?>
+                                        <a href="../php/login.php" class="btn btn-primary">Vai al login</a>
+                                    <?php endif;?>
                                 </div>
-                                <button class="btn btn-outline-success" onclick="addToCart(<?php echo (int)$prod['id']; ?>)">Aggiungi al carrello</button>
                             </div>
-                        </div>
+                        <?php endif;?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -34,7 +38,6 @@
 </div>
 
 <script>
-    // Memorizza la disponibilità di ogni prodotto in un oggetto (devi passare questa info dal PHP)
     let productStock = {
         <?php foreach ($pageParams["products"] as $prod): ?>
             <?php echo (int)$prod['id']; ?>: <?php echo (int)$prod['disponibilita']; ?>,
@@ -50,7 +53,6 @@
             qtyElem.textContent = qty - 1;
         }
 
-        // Riabilita il pulsante + se è stato disabilitato
         if (qty - 1 < productStock[prodId]) {
             increaseBtn.disabled = false;
         }
@@ -65,7 +67,6 @@
             qtyElem.textContent = qty + 1;
         }
 
-        // Disabilita il pulsante + se si raggiunge il limite
         if (qty + 1 >= productStock[prodId]) {
             increaseBtn.disabled = true;
         }
