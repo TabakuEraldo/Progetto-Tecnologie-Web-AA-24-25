@@ -1,4 +1,3 @@
-
 <div class="mt-3">
         <h2>Modifica profilo</h2>
         <form action="../php/executeModificaProfilo.php" method="POST" enctype="multipart/form-data" class="row g-3">
@@ -25,7 +24,7 @@
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Conferma Modifiche</button>
-                <a type="submit" href=# class="btn btn-secondary">Cambia Password</a>
+                <a type="submit" href="../php/modificaPassword.php" class="btn btn-secondary">Cambia Password</a>
             </div>
         </form>
     </div>

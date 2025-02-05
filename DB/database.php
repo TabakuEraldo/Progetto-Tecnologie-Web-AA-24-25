@@ -230,5 +230,18 @@ class DataBase{
         $query->bind_param("sssssi", $email, $nome, $cognome, $indirizzo, $img, $userId);
         return $query->execute();
     }
+
+    public function getPassByID($userId) {
+        $query = $this->db->prepare("SELECT password FROM ecommercedb.utenti WHERE id = ?;");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        return $query->get_result()->fetch_assoc();
+    }
+
+    public function modificaPass($userId, $pass) {
+        $query = $this->db->prepare("UPDATE `ecommercedb`.`utenti` SET `password` = ? WHERE (`id` = ?);");
+        $query->bind_param("si", $pass,$userId);
+        return $query->execute();
+    }
 }
 ?>
