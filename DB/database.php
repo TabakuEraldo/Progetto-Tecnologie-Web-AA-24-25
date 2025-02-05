@@ -126,5 +126,24 @@ class DataBase{
         $query->bind_param("sssdsii", $nome, $img, $categoria, $prezzo, $descrizione, $quantita, $id);
         return $query->execute();
     }
+
+    public function addProdotto($nome, $prezzo, $categoria, $quantita, $descrizione, $img, $userid) {
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodotti` (`nome`, `immagine`, `categoria`, `prezzo`, `descrizione`, `disponibilita`) VALUES (?, ?, ?, ?, ?, ?);");
+        $query->bind_param("sssdsi", $nome, $img, $categoria, $prezzo, $descrizione, $quantita);
+        if($query->execute()){
+            $prodId = $this->db->insert_id;
+            $query = $this->db->prepare("SELECT id FROM ecommercedb.listini WHERE id_Utente = ?");
+            $query->bind_param("i", $userid);
+            $query->execute();
+            $listId = $query->get_result()->fetch_assoc();
+            if($listId != null){
+                $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`) VALUES (?, ?);");
+                $query->bind_param("ii", $listId, $prodId);
+                return $query->execute();
+            }
+            return false;
+        }
+        return false;
+    }
 }
 ?>

@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = trim($_POST['nome']);
     $prezzo = trim($_POST['prezzo']);
     $categoria = trim($_POST['categoria']);
-    $quantita = $_POST['disponibilita'];
+    $quantita = trim($_POST['disponibilita']);
     $descrizione = $_POST['descrizione'];
     $img;
     if(empty($_FILES['immagine']['name'])){

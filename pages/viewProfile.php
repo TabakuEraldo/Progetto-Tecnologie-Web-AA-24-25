@@ -63,7 +63,7 @@ $userRole = $_SESSION['user_role'] ?? null;
                             <div class="card-body">
                                 <h5 class="card-title">Aggiungi Prodotto</h5>
                                 <p class="card-text">Vendi nuovi prodotti agli studenti.</p>
-                                <a href="../php/addProduct.php" class="btn btn-primary btn-sm">Aggiungi Prodotto</a>
+                                <a href="../php/addProdotto.php" class="btn btn-primary btn-sm">Aggiungi Prodotto</a>
                             </div>
                         </div>
                     </div>
