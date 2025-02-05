@@ -158,13 +158,8 @@ class DataBase{
         }
         return false;
     }
-<<<<<<< HEAD
-    
-    public function storicoVendite($userId) {
-=======
 
     public function getStoricoVendite($userId) {
->>>>>>> 029a3bde55195f7c006dfec707b163e93011968c
         $query = $this->db->prepare("SELECT id FROM ecommercedb.vendite WHERE id_Utente = ?;");
         $query->bind_param("i", $userId);
         $query->execute();
@@ -178,8 +173,6 @@ class DataBase{
         return false;
     }
 
-<<<<<<< HEAD
-=======
     public function getVenditoreByIdProdotto($idProdotto) {
         $query = $this->db->prepare("SELECT utenti.id FROM ecommercedb.utenti JOIN listini ON utenti.id = listini.id_Utente JOIN prodottiinlistino ON listini.id = prodottiinlistino.id_Listino JOIN prodotti ON prodotti.id = prodottiinlistino.id_Prodotto WHERE prodotti.id = ?");
         $query->bind_param("i", $idProdotto);
@@ -216,6 +209,5 @@ class DataBase{
         return $query->execute();
     }
 
->>>>>>> 029a3bde55195f7c006dfec707b163e93011968c
 }
 ?>
