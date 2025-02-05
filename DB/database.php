@@ -25,6 +25,7 @@ class DataBase{
         $email = mysqli_real_escape_string($this->db, $email);
         $query->bind_param('s', $email);
         $query->execute();
+        
         return $query->get_result();
     }
 
@@ -39,9 +40,9 @@ class DataBase{
         return $stmt->num_rows;
     }
 
-    public function registration($nome, $cognome, $email, $hashedPassword, $profileImage) {
-        $stmt = $this->db->prepare("INSERT INTO utenti (nome, cognome, email, password, imgProfilo) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $nome, $cognome, $email, $hashedPassword, $profileImage);  
+    public function registration($nome, $cognome, $email, $indirizzo, $hashedPassword, $profileImage) {
+        $stmt = $this->db->prepare("INSERT INTO utenti (nome, cognome, email, indirizzo, password, imgProfilo) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $nome, $cognome, $email, $indirizzo, $hashedPassword, $profileImage);  
         
         if ($stmt->execute()) {
             return true;
@@ -221,6 +222,12 @@ class DataBase{
     public function notificaFineProdotto($prodottoId, $titolo, $testo, $userId) {
         $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Prodotto`) VALUES (?, ?, ?, ?);");
         $query->bind_param("ssii", $titolo, $testo, $userId, $prodottoId);
+        return $query->execute();
+    }
+
+    public function modificaProfiloGenerale($userId, $nome, $cognome, $email, $indirizzo, $img) {
+        $query = $this->db->prepare("UPDATE `ecommercedb`.`utenti` SET `email` = ?, `nome` = ?, `cognome` = ?, `indirizzo` = ?, `imgProfilo` = ? WHERE (`id` = ?);");
+        $query->bind_param("sssssi", $email, $nome, $cognome, $indirizzo, $img, $userId);
         return $query->execute();
     }
 }

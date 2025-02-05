@@ -29,7 +29,7 @@ if ($userId) {
             <h4><?php echo htmlspecialchars($userName); ?></h4>
             <p class="text-muted"><?php echo htmlspecialchars($userEmail); ?></p>
             <p><strong>Account:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
-            <a href="edit_profile.php" class="btn btn-secondary btn-sm">Modifica Profilo</a>
+            <a href="../php/modificaProfilo.php" class="btn btn-secondary btn-sm">Modifica Profilo</a>
             <a href="../php/logout.php" class="btn btn-danger btn-sm">Logout</a>
         </div>
     </div>

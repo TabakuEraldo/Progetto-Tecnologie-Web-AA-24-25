@@ -19,6 +19,11 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
+            
+            <div class="mb-3">
+                <label for="indirizzo" class="form-label">Indirizzo</label>
+                <input type="text" class="form-control" id="indirizzo" name="indirizzo" required>
+            </div>
 
             <!-- Password con pulsante mostra/nascondi -->
             <div class="mb-3 position-relative">

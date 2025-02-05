@@ -1,4 +1,6 @@
 <?php
+require_once 'start.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -8,6 +10,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$pageParams["nome"] = "../pages/viewStoricoVentide.php";
-require '../pages/base.php';
+$pageParams["nome"] = "../pages/viewModificaProfilo.php";
+require "../pages/base.php";
 ?>

@@ -8,15 +8,15 @@
             <div class="col-md-6">
                 <label for="nome" class="form-label fw-semibold fs-6 text-dark">Nome</label>
                 <input type="hidden" name="id" value="<?php echo $prod["id"]; ?>">
-                <input type="text" class="form-control" id="nome" name="nome" value=<?php echo $prod["nome"];?> required>
+                <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $prod["nome"];?>" required>
             </div>
             <div class="col-md-6">
                 <label for="prezzo" class="form-label fw-semibold fs-6 text-dark">Prezzo (€)</label>
-                <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" value=<?php echo $prod["prezzo"];?> required>
+                <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" value="<?php echo $prod["prezzo"];?>" required>
             </div>
             <div class="col-md-6">
                 <label for="categoria" class="form-label">Categoria</label>
-                <select class="form-select" id="categoria" name="categoria" value=<?php echo $prod["categoria"];?>>
+                <select class="form-select" id="categoria" name="categoria" value="<?php echo $prod["categoria"];?>">
                     <option value="Elettronica">Elettronica</option>
                     <option value="Abbigliamento">Abbigliamento</option>
                     <option value="Alimentari">Alimentari</option>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-6">
                 <label for="disponibilita" class="form-label fw-semibold fs-6 text-dark">Quantità</label>
-                <input type="number" class="form-control" id="disponibilita" name="disponibilita" value=<?php echo $prod["disponibilita"];?> required>
+                <input type="number" class="form-control" id="disponibilita" name="disponibilita" value="<?php echo $prod["disponibilita"];?>" required>
             </div>
             <div class="col-12">
                 <label for="descrizione" class="form-label fw-semibold fs-6 text-dark">Descrizione</label>
