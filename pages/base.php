@@ -41,6 +41,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="cart.php">Carrello</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="notifications.php">Notifiche</a>
+                </li>
                   <button class="btn btn-outline-light ms-3" id="themeToggle">
   <i class="bi bi-moon"></i>
 </button>

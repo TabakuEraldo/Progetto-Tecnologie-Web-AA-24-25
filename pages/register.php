@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <h2>Registrati al sito</h2>
-  <form action="../php/register.php" method="POST">
+  <form action="../php/register.php" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="fullName" class="form-label">Nome Completo</label>
       <input type="text" class="form-control" id="fullName" name="fullName" required>
@@ -16,6 +16,10 @@
     <div class="mb-3">
       <label for="confirmPassword" class="form-label">Conferma Password</label>
       <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <div class="mb-3">
+      <label for="profileImage" class="form-label">Immagine Profilo</label>
+      <input type="file" class="form-control" id="profileImage" name="profileImage" accept="image/*" required>
     </div>
 
     <button type="submit" class="btn btn-primary">Registrati</button>

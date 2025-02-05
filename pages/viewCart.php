@@ -46,56 +46,58 @@ $conn->close();
     <?php if (empty($cartItems)): ?>
         <div class="alert alert-info">Il carrello è vuoto.</div>
     <?php else: ?>
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>Immagine</th>
-                    <th>Nome</th>
-                    <th>Prezzo</th>
-                    <th>Quantità</th>
-                    <th>Totale</th>
-                    <th>Azioni</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $grandTotal = 0;
-                foreach($cartItems as $item):
-                    $total = $item['prezzo'] * $item['quantita'];
-                    $grandTotal += $total;
-                ?>
-                <tr>
-                    <td>
-                        <img src="../img/<?php echo htmlspecialchars($item['immagine']); ?>" width="100" alt="Immagine prodotto">
-                    </td>
-                    <td><?php echo htmlspecialchars($item['nome']); ?></td>
-                    <td>€<?php echo number_format($item['prezzo'], 2, ',', '.'); ?></td>
-                    <td>
-                        <div class="input-group input-group-sm">
-                            <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, -1)">-</button>
-                            <input type="number" class="form-control text-center" id="quantity-<?php echo $item['cart_item_id']; ?>"
-                                   value="<?php echo $item['quantita']; ?>"
-                                   data-available-qty="<?php echo $item['disponibilita']; ?>" min="1" 
-                                   max="<?php echo $item['disponibilita']; ?>" readonly>
-                            <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, 1)">+</button>
-                        </div>
-                    </td>
-                    <td>€<?php echo number_format($total, 2, ',', '.'); ?></td>
-                    <td>
-                        <a href="removeFromCart.php?id=<?php echo $item['cart_item_id']; ?>" class="btn btn-danger btn-sm">Rimuovi</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="4" class="text-end"><strong>Totale</strong></td>
-                    <td>€<?php echo number_format($grandTotal, 2, ',', '.'); ?></td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
-        <a href="../php/checkout.php" class="btn btn-primary">Procedi al Checkout</a>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-light table-hover table-bordered">
+                    <tr>
+                        <th>Immagine</th>
+                        <th>Nome</th>
+                        <th>Prezzo</th>
+                        <th>Quantità</th>
+                        <th>Totale</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $grandTotal = 0;
+                    foreach($cartItems as $item):
+                        $total = $item['prezzo'] * $item['quantita'];
+                        $grandTotal += $total;
+                    ?>
+                    <tr>
+                        <td>
+                            <img src="../img/<?php echo htmlspecialchars($item['immagine']); ?>" class="img-fluid" style="max-width: 100px; height: auto;" alt="Immagine prodotto">
+                        </td>
+                        <td><?php echo htmlspecialchars($item['nome']); ?></td>
+                        <td><?php echo number_format($item['prezzo'], 2, ',', '.'); ?>€</td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, -1)">-</button>
+                                <input type="number" class="form-control text-center" id="quantity-<?php echo $item['cart_item_id']; ?>"
+                                    value="<?php echo $item['quantita']; ?>"
+                                    data-available-qty="<?php echo $item['disponibilita']; ?>" min="1" 
+                                    max="<?php echo $item['disponibilita']; ?>" readonly>
+                                <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, 1)">+</button>
+                            </div>
+                        </td>
+                        <td><?php echo number_format($total, 2, ',', '.'); ?>€</td>
+                        <td>
+                            <a href="removeFromCart.php?id=<?php echo $item['cart_item_id']; ?>" class="btn btn-danger btn-sm">Rimuovi</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-end"><strong>Totale</strong></td>
+                        <td><?php echo number_format($grandTotal, 2, ',', '.'); ?>€</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <a href="../php/checkout.php" class="btn btn-primary">Procedi al Pagamento</a>
     <?php endif; ?>
 </div>
 
