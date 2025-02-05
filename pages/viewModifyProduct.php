@@ -7,6 +7,7 @@
         <form action="../php/executeModificaProdotto.php" method="POST" enctype="multipart/form-data" class="row g-3">
             <div class="col-md-6">
                 <label for="nome" class="form-label fw-semibold fs-6 text-dark">Nome</label>
+                <input type="hidden" name="id" value="<?php echo $prod["id"]; ?>">
                 <input type="text" class="form-control" id="nome" name="nome" value=<?php echo $prod["nome"];?> required>
             </div>
             <div class="col-md-6">
@@ -14,8 +15,12 @@
                 <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" value=<?php echo $prod["prezzo"];?> required>
             </div>
             <div class="col-md-6">
-                <label for="categoria" class="form-label fw-semibold fs-6 text-dark">Categoria</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" value=<?php echo $prod["categoria"];?> required>
+                <label for="categoria" class="form-label">Categoria</label>
+                <select class="form-select" id="categoria" name="categoria" value=<?php echo $prod["categoria"];?>>
+                    <option value="Elettronica">Elettronica</option>
+                    <option value="Abbigliamento">Abbigliamento</option>
+                    <option value="Alimentari">Alimentari</option>
+                </select>
             </div>
             <div class="col-md-6">
                 <label for="disponibilita" class="form-label fw-semibold fs-6 text-dark">Quantità</label>

@@ -120,5 +120,11 @@ class DataBase{
         $query->execute();
         return $query->get_result()->fetch_assoc();
     }
+
+    public function modificaProdotto($id, $nome, $prezzo, $categoria, $quantita, $descrizione, $img) {
+        $query = $this->db->prepare("UPDATE `ecommercedb`.`prodotti` SET `nome` = ?, `immagine` = ?, `categoria` = ?, `prezzo` = ?, `descrizione` = ?, `disponibilita` = ? WHERE (`id` = ?);");
+        $query->bind_param("sssdsii", $nome, $img, $categoria, $prezzo, $descrizione, $quantita, $id);
+        return $query->execute();
+    }
 }
 ?>

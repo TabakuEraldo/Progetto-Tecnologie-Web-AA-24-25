@@ -28,7 +28,7 @@
                             <td><?php echo htmlspecialchars($item['categoria']); ?></td>
                             <td><?php echo htmlspecialchars($item['descrizione']); ?></td>
                             <td><?php echo htmlspecialchars($item['disponibilita']); ?></td>
-                            <td class="text-end"><a class="btn btn-primary btn-sm" href="../php/modificaProdotto.php?id=<?php echo $item['id']; ?>">Modifica</a></td>
+                            <td><a class="btn btn-primary btn-sm" href="../php/modificaProdotto.php?id=<?php echo $item['id']; ?>">Modifica</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
