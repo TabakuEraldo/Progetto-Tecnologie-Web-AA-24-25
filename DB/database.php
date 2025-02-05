@@ -81,7 +81,7 @@ class DataBase{
 
     public function getNotifications($userID, $userRole) {
         if($userRole == "buyer"){
-            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NOT NULL");
+            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NOT NULL ORDER BY notifiche.id DESC");
             $query->bind_param("i", $userID);
             $query->execute();
             $result = $query->get_result();
@@ -91,7 +91,7 @@ class DataBase{
             return $result->fetch_all(MYSQLI_ASSOC);
         }
         else if($userRole == "seller"){
-            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NULL");
+            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NULL ORDER BY notifiche.id DESC");
             $query->bind_param("i", $userID);
             $query->execute();
             $result = $query->get_result();
@@ -180,8 +180,22 @@ class DataBase{
         $query->execute();
         $idVendite = $query->get_result()->fetch_assoc();
         if($idVendite != null){
-            $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto WHERE id_Vendita = ?;");
+            $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto WHERE id_Vendita = ? ORDER BY venditaprodotti.id DESC;");
             $query->bind_param("i", $idVendite);
+            $query->execute();
+            return $query->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+        return false;
+    }
+
+    public function getStoricoAcquisti($userId) {
+        $query = $this->db->prepare("SELECT id FROM ecommercedb.acquisti WHERE id_Utente = ?;");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        $idAcquisti = $query->get_result()->fetch_assoc();
+        if($idAcquisti != null){
+            $query = $this->db->prepare("SELECT acquistoprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.acquistoprodotti JOIN prodotti ON prodotti.id = acquistoprodotti.id_Prodotto WHERE id_Acquisto = ? ORDER BY acquistoprodotti.id DESC;");
+            $query->bind_param("i", $idAcquisti);
             $query->execute();
             return $query->get_result()->fetch_all(MYSQLI_ASSOC);
         }
@@ -223,6 +237,5 @@ class DataBase{
         $query->bind_param("ssii", $titolo, $testo, $userId, $prodottoId);
         return $query->execute();
     }
-
 }
 ?>
