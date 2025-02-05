@@ -6,9 +6,8 @@
     <title>StudentMarket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css"/>
-    <link rel="stylesheet" href="../css/formStyle.css"/>
-    </style>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formStyle.css">
   </head>
   <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-custom navbar-expand-lg">
@@ -17,13 +16,14 @@
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
           <div class="offcanvas-header text-black border-bottom">
-            <h5 style="color:white">StudentMarket</h5>
+            <h5>StudentMarket</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center">
             <form class="d-flex mt-3 mt-lg-0 me-lg-3" action="../php/shop.php" method="GET">
+              <label for="search" class="visually-hidden">Cerca</label>
               <input class="form-control me-2" type="text" placeholder="cerca..." aria-label="Search" name="search" id="search">
               <button class="btn btn-outline-light" type="submit" data-bs-dismiss="offcanvas">Cerca</button>
             </form>
@@ -51,7 +51,7 @@
               <?php endif;?>
               <li class="nav-item ms-3">
                 <button class="btn btn-outline" id="themeToggle" title="Cambia Tema">
-                  <i class="bi bi-sun" id="themeIcon"></i>
+                  <em class="bi bi-sun" id="themeIcon"></em>
                 </button>
               </li>
             </ul>       
@@ -94,9 +94,9 @@
             <div class="col-md-4 col-sm-6 mb-3">
                 <h5 class="text-white mb-2">Seguici</h5>
                 <ul class="list-unstyled d-flex gap-3">
-                    <li><a href="#" class="text-white-50"><i class="bi bi-facebook fs-4"></i></a></li>
-                    <li><a href="#" class="text-white-50"><i class="bi bi-instagram fs-4"></i></a></li>
-                    <li><a href="#" class="text-white-50"><i class="bi bi-twitter fs-4"></i></a></li>
+                    <li><a href="#" class="text-white-50" aria-label="Visita la nostra pagina Facebook"><em class="bi bi-facebook fs-4"></em></a></li>
+                    <li><a href="#" class="text-white-50" aria-label="Visita la nostra pagina Instagram"><em class="bi bi-instagram fs-4"></em></a></li>
+                    <li><a href="#" class="text-white-50" aria-label="Visita la nostra pagina Twitter"><em class="bi bi-twitter fs-4"></em></a></li>
                 </ul>
             </div>
         </div>

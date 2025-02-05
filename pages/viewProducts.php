@@ -5,13 +5,11 @@
                 <div class="col">
                     <div class="card h-100 shadow-sm">
                         <img src="<?php echo "../img/" . htmlspecialchars($prod["immagine"]); ?>" class="card-img-top" alt="Immagine del prodotto">
-                        
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($prod["nome"]); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($prod["descrizione"]); ?></p>
                             <p class="card-text"><strong>Prezzo: </strong><?php echo $prod["prezzo"]; ?>$</p>
                         </div>
-
                         <?php if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] == "buyer"):?>
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between align-items-center">
