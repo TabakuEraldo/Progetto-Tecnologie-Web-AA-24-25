@@ -158,8 +158,13 @@ class DataBase{
         }
         return false;
     }
+<<<<<<< HEAD
     
     public function storicoVendite($userId) {
+=======
+
+    public function getStoricoVendite($userId) {
+>>>>>>> 029a3bde55195f7c006dfec707b163e93011968c
         $query = $this->db->prepare("SELECT id FROM ecommercedb.vendite WHERE id_Utente = ?;");
         $query->bind_param("i", $userId);
         $query->execute();
@@ -173,5 +178,44 @@ class DataBase{
         return false;
     }
 
+<<<<<<< HEAD
+=======
+    public function getVenditoreByIdProdotto($idProdotto) {
+        $query = $this->db->prepare("SELECT utenti.id FROM ecommercedb.utenti JOIN listini ON utenti.id = listini.id_Utente JOIN prodottiinlistino ON listini.id = prodottiinlistino.id_Listino JOIN prodotti ON prodotti.id = prodottiinlistino.id_Prodotto WHERE prodotti.id = ?");
+        $query->bind_param("i", $idProdotto);
+        $query->execute();
+        return $query->get_result()->fetch_assoc();
+    }
+
+    public function addVendita($userId, $idProdotto, $quantita) {
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`vendite` (`id_Utente`) VALUES (?);");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        $venditaId = $this->db->insert_id;
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`venditaprodotti` (`id_Vendita`, `id_Prodotto`, `quantita`) VALUES (?, ?, ?);");
+        $query->bind_param("iii", $venditaId, $idProdotto, $quantita);
+        $query->execute();
+        return $venditaId;
+    }
+
+    public function notificaAcquisto($acquistoId, $titolo, $testo, $userId) {
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Acquisto`) VALUES (?, ?, ?, ?);");
+        $query->bind_param("ssii", $titolo, $testo, $userId, $acquistoId);
+        return $query->execute();
+    }
+
+    public function notificaVendita($venditaId, $titolo, $testo, $userId) {
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Vendita`) VALUES (?, ?, ?, ?);");
+        $query->bind_param("ssii", $titolo, $testo, $userId, $venditaId);
+        return $query->execute();
+    }
+
+    public function notificaFineProdotto($prodottoId, $titolo, $testo, $userId) {
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Prodotto`) VALUES (?, ?, ?, ?);");
+        $query->bind_param("ssii", $titolo, $testo, $userId, $prodottoId);
+        return $query->execute();
+    }
+
+>>>>>>> 029a3bde55195f7c006dfec707b163e93011968c
 }
 ?>
