@@ -55,16 +55,23 @@ class DataBase{
     }
 
     public function searchProducts($keyword) {
-        $query = $this->db->prepare("SELECT id, nome, immagine, prezzo, disponibilita, descrizione FROM prodotti WHERE nome LIKE ? OR descrizione LIKE ?");
+        $query = $this->db->prepare("
+            SELECT * FROM prodotti 
+            WHERE nome LIKE ? 
+            OR descrizione LIKE ? 
+            OR categoria LIKE ?
+        ");
+    
         if (!$query) {
             die("Errore nella preparazione della query: " . $this->db->error);
         }
-        $searchTerm = "%".$keyword."%";
-        $query->bind_param("ss", $searchTerm, $searchTerm);
+    
+        $searchTerm = "%" . $keyword . "%";
+        $query->bind_param("sss", $searchTerm, $searchTerm, $searchTerm);
         $query->execute();
-        
+    
         $result = $query->get_result();
-        
+    
         if (!$result) {
             die("Errore nell'esecuzione della query: " . $query->error);
         }
@@ -117,11 +124,19 @@ class DataBase{
     }
 
     public function getProdotto($prodId) {
-        $query = $this->db->prepare("SELECT * FROM prodotti WHERE id = ?");
+        $query = $this->db->prepare("SELECT * FROM prodotti WHERE id = ? ");
         $query->bind_param("i", $prodId);
         $query->execute();
         return $query->get_result()->fetch_assoc();
     }
+
+    public function getProductsByCategory($category) {
+        $query = $this->db->prepare("SELECT * FROM prodotti WHERE categoria = ?");
+        $query->bind_param("s", $category);
+        $query->execute();
+        return $query->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
 
     public function modificaProdotto($id, $nome, $prezzo, $categoria, $quantita, $descrizione, $img) {
         $query = $this->db->prepare("UPDATE `ecommercedb`.`prodotti` SET `nome` = ?, `immagine` = ?, `categoria` = ?, `prezzo` = ?, `descrizione` = ?, `disponibilita` = ? WHERE (`id` = ?);");
