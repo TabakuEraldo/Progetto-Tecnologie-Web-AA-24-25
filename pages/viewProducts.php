@@ -15,11 +15,11 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <?php if(isset($_SESSION['user_id']) && $_SESSION['user_role'] == "buyer"):?>
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-outline-primary" onclick="decreaseQuantity(<?php echo (int)$prod['id']; ?>)">-</button>
+                                            <button type="button" class="btn btn-outline-primary btn-decrease" data-id="<?php echo (int)$prod['id']; ?>">-</button>
                                             <span class="btn btn-outline-primary" id="quantity-<?php echo (int)$prod['id']; ?>">1</span>
-                                            <button type="button" class="btn btn-outline-primary" onclick="increaseQuantity(<?php echo (int)$prod['id']; ?>)">+</button>
+                                            <button type="button" class="btn btn-outline-primary btn-increase" data-id="<?php echo (int)$prod['id']; ?>">+</button>
                                         </div>
-                                        <button class="btn btn-outline-success" onclick="addToCart(<?php echo (int)$prod['id']; ?>)">Aggiungi al carrello</button>
+                                        <button class="btn btn-outline-success btn-add-to-cart" data-id="<?php echo (int)$prod['id']; ?>">Aggiungi al carrello</button>
                                     <?php else:?>
                                         <a href="../php/login.php" class="btn btn-primary">Vai al login</a>
                                     <?php endif;?>
@@ -42,31 +42,41 @@
         <?php endforeach; ?>
     };
 
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".btn-decrease").forEach(button => {
+            button.addEventListener("click", function () {
+                decreaseQuantity(this.dataset.id);
+            });
+        });
+
+        document.querySelectorAll(".btn-increase").forEach(button => {
+            button.addEventListener("click", function () {
+                increaseQuantity(this.dataset.id);
+            });
+        });
+
+        document.querySelectorAll(".btn-add-to-cart").forEach(button => {
+            button.addEventListener("click", function () {
+                addToCart(this.dataset.id);
+            });
+        });
+    });
+
     function decreaseQuantity(prodId) {
         const qtyElem = document.getElementById("quantity-" + prodId);
-        const increaseBtn = document.getElementById("increase-" + prodId);
         let qty = parseInt(qtyElem.textContent);
 
         if (qty > 1) {
             qtyElem.textContent = qty - 1;
         }
-
-        if (qty - 1 < productStock[prodId]) {
-            increaseBtn.disabled = false;
-        }
     }
 
     function increaseQuantity(prodId) {
         const qtyElem = document.getElementById("quantity-" + prodId);
-        const increaseBtn = document.getElementById("increase-" + prodId);
         let qty = parseInt(qtyElem.textContent);
 
         if (qty < productStock[prodId]) {
             qtyElem.textContent = qty + 1;
-        }
-
-        if (qty + 1 >= productStock[prodId]) {
-            increaseBtn.disabled = true;
         }
     }
 

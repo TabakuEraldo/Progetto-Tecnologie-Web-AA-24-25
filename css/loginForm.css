@@ -1,0 +1,23 @@
+.role-btn {
+    display: inline-block;
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #BB2E29;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #f8f9fa;
+    color: #BB2E29;
+}
+
+.btn-check:checked + .role-btn {
+    background-color: #BB2E29;
+    color: white;
+}
+
+.role-btn:hover {
+    background-color: #BB2E29;
+    color: white;
+}

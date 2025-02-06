@@ -1,0 +1,70 @@
+/* Aggiungi una classe unica per evitare conflitti */
+.page-register .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-bottom: 3rem;
+}
+
+.page-register .form-card {
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 450px;
+    margin-top: 30px;  /* Spazio sopra la card */
+}
+
+.page-register .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.page-register .form-control {
+    padding: 0.8rem;  /* Ridotto per una maggiore compattezza */
+    margin-bottom: 1rem; /* Distanza tra i campi */
+}
+
+.page-register .toggle-password {
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.page-register .submit-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.page-register .submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.page-register .row.g-3 {
+    margin-bottom: 1.5rem;
+}
+
+.page-register p.mt-3 {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Aggiungi uno spazio maggiore tra la card e il resto */
+.page-register .form-card {
+    padding: 1.5rem;
+}
+
+.page-register .form-control {
+    font-size: 0.9rem;
+}
+
+.page-register .submit-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+}

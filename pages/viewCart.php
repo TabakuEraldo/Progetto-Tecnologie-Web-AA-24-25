@@ -72,13 +72,13 @@ $conn->close();
                         <td><?php echo number_format($item['prezzo'], 2, ',', '.'); ?>€</td>
                         <td>
                             <div class="input-group input-group-sm">
-                                <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, -1)">-</button>
-                                <label for="quantity-<?php echo $item['cart_item_id']; ?>" class="visually-hidden">Quantita</label>
+                                <button class="btn btn-outline-primary btn-decrease" data-id="<?php echo $item['cart_item_id']; ?>">-</button>
+                                <label for="quantity-<?php echo $item['cart_item_id']; ?>" class="visually-hidden">Quantità</label>
                                 <input type="number" class="form-control text-center" id="quantity-<?php echo $item['cart_item_id']; ?>"
                                     value="<?php echo $item['quantita']; ?>"
                                     data-available-qty="<?php echo $item['disponibilita']; ?>" min="1" 
                                     max="<?php echo $item['disponibilita']; ?>" readonly>
-                                <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, 1)">+</button>
+                                <button class="btn btn-outline-primary btn-increase" data-id="<?php echo $item['cart_item_id']; ?>">+</button>
                             </div>
                         </td>
                         <td><?php echo number_format($total, 2, ',', '.'); ?>€</td>
@@ -102,10 +102,23 @@ $conn->close();
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-decrease").forEach(button => {
+        button.addEventListener("click", function () {
+            updateQuantity(this.dataset.id, -1);
+        });
+    });
+
+    document.querySelectorAll(".btn-increase").forEach(button => {
+        button.addEventListener("click", function () {
+            updateQuantity(this.dataset.id, 1);
+        });
+    });
+});
+
 function updateQuantity(cartItemId, change) {
     let qtyElem = document.getElementById("quantity-" + cartItemId);
     let currentQty = parseInt(qtyElem.value);
-
     let availableQty = parseInt(qtyElem.getAttribute('data-available-qty'));
 
     if (currentQty + change >= 1 && currentQty + change <= availableQty) {
@@ -132,5 +145,4 @@ function updateQuantity(cartItemId, change) {
         alert("La quantità richiesta supera la disponibilità del prodotto.");
     }
 }
-
 </script>

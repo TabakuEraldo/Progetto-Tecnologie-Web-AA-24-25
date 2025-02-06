@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../css/loginForm.css">
+</head>
 <?php if (isset($_SESSION["errore"])): ?>
     <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
         <div id="errorToast" class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
