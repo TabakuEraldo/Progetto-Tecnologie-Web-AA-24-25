@@ -37,88 +37,88 @@
 
 <script>
     let productStock = {
-        <?php foreach ($pageParams["products"] as $prod): ?>
-            <?php echo (int)$prod['id']; ?>: <?php echo (int)$prod['disponibilita']; ?>,
-        <?php endforeach; ?>
-    };
+    <?php foreach ($pageParams["products"] as $prod): ?>
+        <?php echo (int)$prod['id']; ?>: <?php echo (int)$prod['disponibilita']; ?>,
+    <?php endforeach; ?>
+};
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".btn-decrease").forEach(button => {
-            button.addEventListener("click", function () {
-                decreaseQuantity(this.dataset.id);
-            });
-        });
-
-        document.querySelectorAll(".btn-increase").forEach(button => {
-            button.addEventListener("click", function () {
-                increaseQuantity(this.dataset.id);
-            });
-        });
-
-        document.querySelectorAll(".btn-add-to-cart").forEach(button => {
-            button.addEventListener("click", function () {
-                addToCart(this.dataset.id);
-            });
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-decrease").forEach(button => {
+        button.addEventListener("click", function () {
+            decreaseQuantity(this.dataset.id);
         });
     });
 
-    function decreaseQuantity(prodId) {
-        const qtyElem = document.getElementById("quantity-" + prodId);
-        let qty = parseInt(qtyElem.textContent);
-
-        if (qty > 1) {
-            qtyElem.textContent = qty - 1;
-        }
-    }
-
-    function increaseQuantity(prodId) {
-        const qtyElem = document.getElementById("quantity-" + prodId);
-        let qty = parseInt(qtyElem.textContent);
-
-        if (qty < productStock[prodId]) {
-            qtyElem.textContent = qty + 1;
-        }
-    }
-
-    function showToast(message, type) {
-    let toastContainer = document.querySelector(".toast-container");
-    if (!toastContainer) {
-        toastContainer = document.createElement("div");
-        toastContainer.className = "position-fixed top-25 start-50 translate-middle-x p-3 toast-container";
-        document.body.appendChild(toastContainer);
-    }
-    
-    let toast = document.createElement("div");
-    toast.className = `toast align-items-center text-bg-${type} border-0 show`;
-    toast.setAttribute("role", "alert");
-    toast.setAttribute("aria-live", "assertive");
-    toast.setAttribute("aria-atomic", "true");
-    
-    toast.innerHTML = `
-        <div class="d-flex">
-            <div class="toast-body">
-                ${message}
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    `;
-    
-    toastContainer.appendChild(toast);
-    setTimeout(() => { toast.remove(); }, 3000);
-    }
-
-    function addToCart(prodId) {
-        const qtyElem = document.getElementById("quantity-" + prodId);
-        const qty = parseInt(qtyElem.textContent);
-
-        fetch("../php/addToCart.php?id=" + prodId + "&quantity=" + qty, {
-            method: "GET"
-        }).then(response => response.text())
-        .then(data => {
-            showToast("Prodotto aggiunto al carrello!", "primary");
-        }).catch(error => {
-            console.error("Errore:", error);
-            showToast("Si è verificato un errore nell'operazione.", "danger");
+    document.querySelectorAll(".btn-increase").forEach(button => {
+        button.addEventListener("click", function () {
+            increaseQuantity(this.dataset.id);
         });
+    });
+
+    document.querySelectorAll(".btn-add-to-cart").forEach(button => {
+        button.addEventListener("click", function () {
+            addToCart(this.dataset.id);
+        });
+    });
+});
+
+function decreaseQuantity(prodId) {
+    const qtyElem = document.getElementById("quantity-" + prodId);
+    let qty = parseInt(qtyElem.textContent);
+
+    if (qty > 1) {
+        qtyElem.textContent = qty - 1;
     }
+}
+
+function increaseQuantity(prodId) {
+    const qtyElem = document.getElementById("quantity-" + prodId);
+    let qty = parseInt(qtyElem.textContent);
+
+    if (qty < productStock[prodId]) {
+        qtyElem.textContent = qty + 1;
+    }
+}
+
+function showToast(message, type) {
+let toastContainer = document.querySelector(".toast-container");
+if (!toastContainer) {
+    toastContainer = document.createElement("div");
+    toastContainer.className = "position-fixed top-25 start-50 translate-middle-x p-3 toast-container";
+    document.body.appendChild(toastContainer);
+}
+
+let toast = document.createElement("div");
+toast.className = `toast align-items-center text-bg-${type} border-0 show`;
+toast.setAttribute("role", "alert");
+toast.setAttribute("aria-live", "assertive");
+toast.setAttribute("aria-atomic", "true");
+
+toast.innerHTML = `
+    <div class="d-flex">
+        <div class="toast-body">
+            ${message}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+`;
+
+toastContainer.appendChild(toast);
+setTimeout(() => { toast.remove(); }, 3000);
+}
+
+function addToCart(prodId) {
+    const qtyElem = document.getElementById("quantity-" + prodId);
+    const qty = parseInt(qtyElem.textContent);
+
+    fetch("../php/addToCart.php?id=" + prodId + "&quantity=" + qty, {
+        method: "GET"
+    }).then(response => response.text())
+    .then(data => {
+        showToast("Prodotto aggiunto al carrello!", "primary");
+    }).catch(error => {
+        console.error("Errore:", error);
+        showToast("Si è verificato un errore nell'operazione.", "danger");
+    });
+}
 </script>

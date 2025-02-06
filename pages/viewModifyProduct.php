@@ -66,17 +66,5 @@
     </div>
 <?php endif;?>
 
-<script>
-    document.getElementById("prezzo").addEventListener("input", function () {
-        if (this.value < 0) {
-            this.value = 0;
-        }
-    });
-
-    document.getElementById("disponibilita").addEventListener("input", function () {
-        if (this.value < 0) {
-            this.value = 0;
-        }
-    });
-</script>
+<script src="../js/modifyProduct.js"></script>
 
