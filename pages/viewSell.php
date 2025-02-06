@@ -1,1 +1,0 @@
-<h1>Qui i prodotti venduti</h1>

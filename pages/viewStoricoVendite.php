@@ -1,6 +1,6 @@
 <?php $storico = $pageParams["storicoVendite"];?>
 <div class="container mt-5">
-    <h2 class="mb-4">Le tue vendite</h2>
+    <h4 class="mb-4">Le tue vendite</h4>
     <?php if (empty($storico)): ?>
         <div class="alert alert-info">Nessuna vendita effettuata</div>
     <?php else: ?>

@@ -12,7 +12,7 @@
 <?php endif; unset($_SESSION["confermaAddProdotto"]);?>
 <?php $listino = $pageParams["listino"];?>
 <div class="container mt-5">
-    <h2 class="mb-4">Il tuo listino</h2>
+    <h4 class="mb-4">Il tuo listino</h4>
     <?php if (empty($listino)): ?>
         <div class="alert alert-info">Il listino è vuoto.</div>
     <?php else: ?>

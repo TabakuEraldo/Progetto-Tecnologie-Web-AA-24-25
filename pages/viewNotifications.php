@@ -1,4 +1,4 @@
-<h2 class="text-center mb-3">Le tue notifiche</h2>
+<h4 class="text-center mb-3">Le tue notifiche</h4>
 <table class="table">
   <tbody>
     <?php if (!empty($pageParams["notifiche"])): ?>
