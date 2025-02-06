@@ -19,22 +19,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['user_role'] = $_POST['role']; 
             $_SESSION['user_img'] = $row['imgProfilo']; 
-            require "profile.php";
+            header("Location: profile.php");
             exit();
         } else {
-            $error_message = "⚠️ Password errata.";
+            $error_message = "⚠️ Dati errati.";
         }
     } else {
-        $error_message = "⚠️ Email non trovata.";
+        $error_message = "⚠️ Dati errati.";
     }
 }
 ?>
 
 
-<?php if (isset($error_message)): ?>
-    <div class="alert alert-danger text-center">
-        <?php echo htmlspecialchars($error_message); ?>
-    </div>
-<?php endif; ?>
+<?php 
+    if (isset($error_message)){
+        $_SESSION["errore"] = $error_message;
+        header("Location: login.php");
+    }
+?>
+
+
+
 
 

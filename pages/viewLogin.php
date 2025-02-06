@@ -1,3 +1,15 @@
+<?php if (isset($_SESSION["errore"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["errore"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-sm" style="width: 100%; max-width: 400px;">
         <h4 class="text-center mb-4">Accedi al tuo account</h4>

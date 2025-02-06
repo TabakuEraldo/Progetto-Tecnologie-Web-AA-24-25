@@ -24,7 +24,6 @@ if ($userId) {
 <div class="container mt-5">
     <div class="card text-center mb-4">
         <div class="card-body">
-            <!-- Visualizzazione dell'immagine del profilo -->
             <img src="../img/<?php echo htmlspecialchars($profileImage); ?>" alt="Foto Profilo" class="profile-img mb-3">
             <h4><?php echo htmlspecialchars($userName); ?></h4>
             <p class="text-muted"><?php echo htmlspecialchars($userEmail); ?></p>
@@ -37,7 +36,7 @@ if ($userId) {
 
     <div class="card mb-4">
         <div class="card-body">
-            <h2 class="text-center mb-3">Dashboard</h2>
+            <h4 class="text-center mb-3">Dashboard</h4>
             <div class="row">
                 <?php if ($userRole == 'buyer'): ?>
                     <!-- Se l'utente è un compratore -->
