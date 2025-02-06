@@ -10,19 +10,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmPassword = $_POST['confirmPassword'];
 
     if (empty($nome) || empty($email) || empty($password) || empty($confirmPassword) || empty($cognome) || empty($indirizzo)) {
-        die("Tutti i campi sono obbligatori!");
+        $errore = "Tutti i campi sono obbligatori!";
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Formato email non valido!");
+        $errore = "Formato email non valido!";
     }
 
     if ($password !== $confirmPassword) {
-        die("Le password non corrispondono!");
+        $errore = "Le password non corrispondono!";
     }
 
     if ($db->isAlreadyRegistered($email) > 0) {
-        die("Esiste già un account con questa email!");
+        $errore = "Esiste già un account con questa email!";
     }
 
     $profileImage = null;
@@ -38,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $uploadFile = $uploadDir . $profileImage;
 
             if (!move_uploaded_file($tmpName, $uploadFile)) {
-                die("Errore nel caricamento dell'immagine!");
+                $errore = "Errore nel caricamento dell'immagine!";
             }
         } else {
-            die("Formato immagine non supportato!");
+            $errore = "Formato immagine non supportato!";
         }
     } else {
         $profileImage = 'default.png';
@@ -50,12 +50,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     if ($db->registration($nome, $cognome, $email, $indirizzo, $hashedPassword, $profileImage)) {
-        echo "<script>
-                alert('Registrazione completata con successo! Ora puoi accedere.');
-                window.location.href = 'login.php';
-              </script>";
+        $_SESSION["confermaRegistrazione"] = "Registrazione avvenuta con successo";
+        header("Location: login.php");
     } else {
-        die("Errore durante la registrazione");
+        $errore = "Errore durante la registrazione";
+    }
+
+    if(isset($error)){
+        $_SESSION["errore"] = $error;
+            header("Location: register.php");
     }
 }
 ?>

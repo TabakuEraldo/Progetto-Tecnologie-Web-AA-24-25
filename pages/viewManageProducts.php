@@ -10,6 +10,18 @@
         </div>
     </div>
 <?php endif; unset($_SESSION["confermaAddProdotto"]);?>
+<?php if (isset($_SESSION["confermaModifica"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["confermaModifica"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; unset($_SESSION["confermaModifica"]);?>
 <?php $listino = $pageParams["listino"];?>
 <div class="container mt-5">
     <h4 class="mb-4">Il tuo listino</h4>

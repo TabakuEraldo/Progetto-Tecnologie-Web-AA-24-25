@@ -16,17 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $img = $_FILES['immagine']['name'];
     }
     
-    if(empty($id)){
-        die("Errore nella modifica del prodotto");
+    if(empty($id) || empty($nome) || empty($prezzo) || empty($categoria) || empty($quantita) || empty($descrizione)){
+        $errore = "Errore nella modifica del prodotto";
     }
 
     if ($db->modificaProdotto($id, $nome, $prezzo, $categoria, $quantita, $descrizione, $img)) {
-        echo "<script>
-                alert('Prodotto modificato con successo');
-                window.location.href = 'manageProducts.php';
-              </script>";
+        $_SESSION["confermaModifica"] = "Modifica avvenuta con successo";
+        header("Location: manageProducts.php");
     } else {
-        die("Errore durante la modifica");
+        $errore = "Errore durante la modifica";
+    }
+
+    if(isset($error)){
+        $_SESSION["errore"] = $error;
+            header("Location: modificaProdotto.php?id=".$_GET["id"]);
     }
 }
 ?>

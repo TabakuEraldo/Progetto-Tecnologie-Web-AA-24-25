@@ -2,8 +2,20 @@
     <p class="text-muted text-center w-100">Nessun prodotto selezionato</p>
     <a href="../php/manageProducts.php" class="btn btn-secondary btn-sm">Indietro</a>
 <?php else: $prod= $pageParams["modificaProd"];?>
-    <div class="mt-3">
-        <h2>Modifica prodotto</h2>
+<?php if (isset($_SESSION["confermaModifica"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["confermaModifica"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; unset($_SESSION["confermaModifica"]);?>
+    <div class="mt-3 mb-5">
+        <h4>Modifica prodotto</h4>
         <form action="../php/executeModificaProdotto.php" method="POST" enctype="multipart/form-data" class="row g-3">
             <div class="col-md-6">
                 <label for="nome" class="form-label fw-semibold fs-6 text-dark">Nome</label>
@@ -16,10 +28,10 @@
             </div>
             <div class="col-md-6">
                 <label for="categoria" class="form-label">Categoria</label>
-                <select class="form-select" id="categoria" name="categoria" value="<?php echo $prod["categoria"];?>">
-                    <option value="Elettronica">Elettronica</option>
-                    <option value="Abbigliamento">Abbigliamento</option>
-                    <option value="Alimentari">Alimentari</option>
+                <select class="form-select" id="categoria" name="categoria">
+                    <option value="Elettronica" <?php if ($prod["categoria"] == "Elettronica") echo "selected"; ?>>Elettronica</option>
+                    <option value="Abbigliamento" <?php if ($prod["categoria"] == "Abbigliamento") echo "selected"; ?>>Abbigliamento</option>
+                    <option value="Alimentari" <?php if ($prod["categoria"] == "Alimentari") echo "selected"; ?>>Alimentari</option>
                 </select>
             </div>
             <div class="col-md-6">
