@@ -1,32 +1,32 @@
     <header class="bg-primary text-white text-center py-5">
         <div class="container">
-            <h1>Benvenuto su StudentMarket</h1>
+            <h2>Benvenuto su StudentMarket</h2>
             <p>Compra e vendi prodotti tra studenti in modo facile e veloce!</p>
             <a href="shop.php" class="btn btn-light">Scopri i prodotti</a>
         </div>
     </header>
 
     <section class="container mt-5 py-5">
-        <h2 class="text-center">Categorie in evidenza</h2>
+        <h3 class="text-center">Categorie in evidenza</h3>
         <div class="row text-center mt-4">
             <div class="col-md-4">
                 <a href="shop.php?search=didattica" class="text-decoration-none text-dark">
                     <div class="card p-4 shadow">
-                        <h3>Didattica</h3>
+                        <h4>Didattica</h4>
                     </div>
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="shop.php?search=elettronica" class="text-decoration-none text-dark">
                     <div class="card p-4 shadow">
-                        <h3>Elettronica</h3>
+                        <h4>Elettronica</h4>
                     </div>
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="shop.php?search=usato" class="text-decoration-none text-dark">
                     <div class="card p-4 shadow">
-                        <h3>Usato</h3>
+                        <h4>Usato</h4>
                     </div>
                 </a>
             </div>
@@ -74,15 +74,15 @@
 
 
 <section class="container mt-5 py-5">
-    <h2 class="text-center">Domande Frequenti (FAQ)</h2>
+    <h3 class="text-center">Domande Frequenti (FAQ)</h3>
     <div class="accordion mt-4" id="faqAccordion">
 
         <div class="accordion-item">
-            <h3 class="accordion-header" id="faqHeading1">
+            <h4 class="accordion-header" id="faqHeading1">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">
                     Come posso vendere un prodotto su StudentMarket?
                 </button>
-            </h3>
+            </h4>
             <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     Vendere un prodotto è semplice! Basta registrarsi, accedere al proprio profilo e cliccare su "Vendi un prodotto". Compila i dettagli, carica una foto e pubblica l'annuncio. Una volta trovato un acquirente, potrai organizzare la consegna o la spedizione.
@@ -91,11 +91,11 @@
         </div>
 
         <div class="accordion-item">
-            <h3 class="accordion-header" id="faqHeading2">
+            <h4 class="accordion-header" id="faqHeading2">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
                 Quanto costa vendere un prodotto?
                 </button>
-            </h3>
+            </h4>
             <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                 Pubblicare un annuncio su StudentMarket è completamente gratuito! Tuttavia, potresti scegliere di mettere in evidenza il tuo annuncio con una piccola commissione per aumentarne la visibilità.
@@ -104,11 +104,11 @@
         </div>
 
         <div class="accordion-item">
-            <h3 class="accordion-header" id="faqHeading3">
+            <h4 class="accordion-header" id="faqHeading3">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
                 Posso vendere qualsiasi tipo di prodotto?
                 </button>
-            </h3>
+            </h4>
             <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                 No, su StudentMarket è consentita solo la vendita di prodotti adatti a un ambiente studentesco, come libri, elettronica, materiale didattico e oggetti di seconda mano. È vietata la vendita di articoli illegali, pericolosi o non conformi alle nostre linee guida
