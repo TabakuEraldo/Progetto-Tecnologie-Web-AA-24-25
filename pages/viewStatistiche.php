@@ -4,7 +4,6 @@ $endDate   = $_GET['end_date']   ?? date('Y-m-d');
 
 $userId = $_SESSION['user_id'];
 
-// Query per ottenere le vendite nel periodo per il venditore corrente
 $query = "
     SELECT p.nome AS prodotto, vp.quantita, vp.data, (p.prezzo * vp.quantita) AS ricavo
     FROM VenditaProdotti vp
@@ -18,17 +17,39 @@ $stmt->bind_param("iss", $userId, $startDate, $endDate);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Inizializza le variabili per il grafico
 $vendite = [];
 $prodottiVenduti = 0;
 $ricaviTotali = 0;
+$prodottiVendutiCount = [];
 
 while ($row = $result->fetch_assoc()) {
     $vendite[] = $row;
     $prodottiVenduti += $row['quantita'];
     $ricaviTotali += $row['ricavo'];
+    if (!isset($prodottiVendutiCount[$row['prodotto']])) {
+        $prodottiVendutiCount[$row['prodotto']] = 0;
+    }
+    $prodottiVendutiCount[$row['prodotto']] += $row['quantita'];
 }
+
+$prodottoPiuVenduto = array_keys($prodottiVendutiCount, max($prodottiVendutiCount))[0];
+$quantitaPiuVenduta = $prodottiVendutiCount[$prodottoPiuVenduto];
+
+$aggregated = [];
+foreach ($vendite as $sale) {
+    $prod = $sale['prodotto'];
+    if (!isset($aggregated[$prod])) {
+        $aggregated[$prod] = 0;
+    }
+    $aggregated[$prod] += $sale['ricavo'];
+}
+$aggLabels = array_keys($aggregated);
+$aggRevenues = array_values($aggregated);
 ?>
+
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
 <div class="container mt-4">
     <h2 class="text-center">Statistiche Vendite</h2>
@@ -49,10 +70,16 @@ while ($row = $result->fetch_assoc()) {
                 </div>
             </div>
         </div>
-        <!-- Puoi aggiungere altre card se necessario -->
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h4>Prodotto Più Venduto</h4>
+                    <p class="fs-3"><?= htmlspecialchars($prodottoPiuVenduto) ?></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Form per selezionare l'intervallo di date -->
     <form method="GET" class="mt-4">
         <div class="row">
             <div class="col-md-4">
@@ -69,56 +96,39 @@ while ($row = $result->fetch_assoc()) {
         </div>
     </form>
 
-    <!-- Grafico delle vendite -->
-    <canvas id="salesChart" class="mt-4"></canvas>
+    <canvas id="aggChart" class="mt-4"></canvas>
 
-    <!-- Tabella dettagli vendite -->
-    <table class="table table-bordered mt-4">
-        <thead>
-            <tr>
-                <th>Prodotto</th>
-                <th>Quantità</th>
-                <th>Data</th>
-                <th>Ricavo (€)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($vendite as $v): ?>
-                <tr>
-                    <td><?= htmlspecialchars($v['prodotto']) ?></td>
-                    <td><?= $v['quantita'] ?></td>
-                    <td><?= $v['data'] ?></td>
-                    <td>€<?= number_format($v['ricavo'], 2) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
-    <!-- Pulsante esporta CSV -->
-    <a href="?export=true" class="btn btn-warning mt-3">Scarica CSV</a>
 </div>
 
 <script>
-    // Inizializza il grafico con Chart.js
-    const salesData = <?= json_encode($vendite) ?>;
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: salesData.map(v => v.data),
-            datasets: [{
-                label: 'Ricavo (€)',
-                data: salesData.map(v => parseFloat(v.ricavo)),
-                borderColor: 'blue',
-                fill: false
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { title: { display: true, text: 'Data' } },
-                y: { title: { display: true, text: 'Ricavo (€)' } }
+const aggLabels = <?= json_encode($aggLabels) ?>;
+const aggRevenues = <?= json_encode($aggRevenues) ?>;
+const ctxBar = document.getElementById('aggChart').getContext('2d');
+new Chart(ctxBar, {
+    type: 'bar',
+    data: {
+        labels: aggLabels,
+        datasets: [{
+            label: 'Ricavo per Prodotto (€)',
+            data: aggRevenues,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Ricavo (€)' }
+            },
+            x: {
+                title: { display: true, text: 'Prodotto' }
             }
         }
-    });
+    }
+});
 </script>
+
+

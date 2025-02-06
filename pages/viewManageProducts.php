@@ -45,7 +45,7 @@
                     <?php foreach($listino as $item):?>
                         <tr>
                             <td>
-                                <img src="../img/<?php echo htmlspecialchars($item['immagine']); ?>" class="img-fluid" style="max-width: 100px; height: auto;" alt="Immagine prodotto">
+                            <img src="../img/<?php echo htmlspecialchars($item['immagine']); ?>" class="img-fluid" style="max-width: 100px; height: auto;" alt="Immagine prodotto">
                             </td>
                             <td><?php echo htmlspecialchars($item['nome']); ?></td>
                             <td><?php echo number_format($item['prezzo'], 2, ',', '.'); ?>€</td>
