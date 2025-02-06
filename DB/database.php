@@ -86,7 +86,7 @@ class DataBase{
 
     public function getNotifications($userID, $userRole) {
         if($userRole == "buyer"){
-            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NOT NULL ORDER BY notifiche.id DESC");
+            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NOT NULL ORDER BY notifiche.data DESC, notifiche.isLetto");
             $query->bind_param("i", $userID);
             $query->execute();
             $result = $query->get_result();
@@ -96,7 +96,7 @@ class DataBase{
             return $result->fetch_all(MYSQLI_ASSOC);
         }
         else if($userRole == "seller"){
-            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NULL ORDER BY notifiche.id DESC");
+            $query = $this->db->prepare("SELECT notifiche.* FROM notifiche JOIN utenti ON notifiche.id_Utente = utenti.id WHERE utenti.id = ? AND notifiche.id_Acquisto IS NULL ORDER BY notifiche.data DESC, notifiche.isLetto");
             $query->bind_param("i", $userID);
             $query->execute();
             $result = $query->get_result();
@@ -122,7 +122,7 @@ class DataBase{
     }
 
     public function getListino($userId) {
-        $query = $this->db->prepare("SELECT prodotti.* FROM listini JOIN prodottiinlistino ON listini.id = prodottiinlistino.id_listino JOIN prodotti ON prodottiinlistino.id_prodotto = prodotti.id WHERE listini.id_utente = ? ORDER BY disponibilita DESC");
+        $query = $this->db->prepare("SELECT prodotti.* FROM listini JOIN prodottiinlistino ON listini.id = prodottiinlistino.id_listino JOIN prodotti ON prodottiinlistino.id_prodotto = prodotti.id WHERE listini.id_utente = ? ORDER BY prodottiinlistino.data DESC, prodotti.disponibilita DESC");
         $query->bind_param("i", $userId);
         $query->execute();
         return $query->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -150,7 +150,7 @@ class DataBase{
     }
 
     public function addProdotto($nome, $prezzo, $categoria, $quantita, $descrizione, $img, $userid) {
-        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodotti` (`nome`, `immagine`, `categoria`, `prezzo`, `descrizione`, `disponibilita`) VALUES (?, ?, ?, ?, ?, ?);");
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodotti` (`nome`, `immagine`, `categoria`, `prezzo`, `descrizione`, `disponibilita`, `data`) VALUES (?, ?, ?, ?, ?, ?, CURRENT_DATE);");
         $query->bind_param("sssdsi", $nome, $img, $categoria, $prezzo, $descrizione, $quantita);
     
         if ($query->execute()) {
@@ -162,7 +162,7 @@ class DataBase{
             $listRow = $result->fetch_assoc(); 
             if ($listRow) {
                 $listId = $listRow['id'];
-                $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`) VALUES (?, ?);");
+                $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`, `data`) VALUES (?, ?, CURRENT_DATE);");
                 $query->bind_param("ii", $listId, $prodId);
                 return $query->execute();
             } else {
@@ -170,7 +170,7 @@ class DataBase{
                 $query->bind_param("i", $userid);
                 if ($query->execute()) {
                     $listId = $this->db->insert_id;
-                    $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`) VALUES (?, ?);");
+                    $query = $this->db->prepare("INSERT INTO `ecommercedb`.`prodottiinlistino` (`id_Listino`, `id_Prodotto`, `data`) VALUES (?, ?, CURRENT_DATE);");
                     $query->bind_param("ii", $listId, $prodId);
                     return $query->execute();
                 }
@@ -180,14 +180,14 @@ class DataBase{
     }
 
     public function getStoricoVendite($userId) {
-        $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto JOIN vendite ON venditaprodotti.id_Vendita = vendite.id WHERE vendite.id_Utente = ? ORDER BY venditaprodotti.id DESC;");
+        $query = $this->db->prepare("SELECT venditaprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.venditaprodotti JOIN prodotti ON prodotti.id = venditaprodotti.id_Prodotto JOIN vendite ON venditaprodotti.id_Vendita = vendite.id WHERE vendite.id_Utente = ? ORDER BY venditaprodotti.data DESC;");
         $query->bind_param("i", $userId);
         $query->execute();
         return $query->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getStoricoAcquisti($userId) {
-        $query = $this->db->prepare("SELECT acquistoprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.acquistoprodotti JOIN prodotti ON prodotti.id = acquistoprodotti.id_Prodotto JOIN acquisti ON acquisti.id = acquistoprodotti.id_Acquisto WHERE acquisti.id_Utente = ? ORDER BY acquistoprodotti.id DESC;");
+        $query = $this->db->prepare("SELECT acquistoprodotti.quantita, prodotti.nome, prodotti.prezzo, prodotti.immagine, prodotti.categoria FROM ecommercedb.acquistoprodotti JOIN prodotti ON prodotti.id = acquistoprodotti.id_Prodotto JOIN acquisti ON acquisti.id = acquistoprodotti.id_Acquisto WHERE acquisti.id_Utente = ? ORDER BY acquistoprodotti.data DESC;");
         $query->bind_param("i", $userId);
         $query->execute();
         return $query->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -205,26 +205,26 @@ class DataBase{
         $query->bind_param("i", $userId);
         $query->execute();
         $venditaId = $this->db->insert_id;
-        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`venditaprodotti` (`id_Vendita`, `id_Prodotto`, `quantita`) VALUES (?, ?, ?);");
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`venditaprodotti` (`id_Vendita`, `id_Prodotto`, `quantita`, `data`) VALUES (?, ?, ?, CURRENT_DATE);");
         $query->bind_param("iii", $venditaId, $idProdotto, $quantita);
         $query->execute();
         return $venditaId;
     }
 
     public function notificaAcquisto($acquistoId, $titolo, $testo, $userId) {
-        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Acquisto`) VALUES (?, ?, ?, ?);");
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Acquisto`, `data`) VALUES (?, ?, ?, ?, CURRENT_DATE);");
         $query->bind_param("ssii", $titolo, $testo, $userId, $acquistoId);
         return $query->execute();
     }
 
     public function notificaVendita($venditaId, $titolo, $testo, $userId) {
-        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Vendita`) VALUES (?, ?, ?, ?);");
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Vendita`, `data`) VALUES (?, ?, ?, ?, CURRENT_DATE);");
         $query->bind_param("ssii", $titolo, $testo, $userId, $venditaId);
         return $query->execute();
     }
 
     public function notificaFineProdotto($prodottoId, $titolo, $testo, $userId) {
-        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Prodotto`) VALUES (?, ?, ?, ?);");
+        $query = $this->db->prepare("INSERT INTO `ecommercedb`.`notifiche` (`titolo`, `testo`, `id_Utente`, `id_Prodotto`, `data`) VALUES (?, ?, ?, ?, CURRENT_DATE);");
         $query->bind_param("ssii", $titolo, $testo, $userId, $prodottoId);
         return $query->execute();
     }

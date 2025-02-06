@@ -77,7 +77,7 @@ if ($stmt->num_rows > 0) {
     $stmt->close();
 } else {
     $stmt->close();
-    $stmt = $conn->prepare("INSERT INTO ProdottiInCarrello (id_Carrello, id_Prodotto, quantita) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO ProdottiInCarrello (id_Carrello, id_Prodotto, quantita, data) VALUES (?, ?, ?, CURRENT_DATE)");
     $stmt->bind_param("iii", $cartId, $productId, $quantity);
     $stmt->execute();
     $stmt->close();

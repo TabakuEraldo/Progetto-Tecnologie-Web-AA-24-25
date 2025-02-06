@@ -65,7 +65,7 @@ try {
             throw new Exception("Errore: Stock insufficiente per il prodotto ID: $productId");
         }
 
-        $stmt = $conn->prepare("INSERT INTO AcquistoProdotti (id_Acquisto, id_Prodotto, quantita) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO AcquistoProdotti (id_Acquisto, id_Prodotto, quantita, data) VALUES (?, ?, ?, CURRENT_DATE)");
         $stmt->bind_param("iii", $acquistoId, $productId, $quantity);
         if (!$stmt->execute()) {
             throw new Exception("Errore nell'inserimento in AcquistoProdotti: " . $stmt->error);

@@ -30,8 +30,8 @@
                 <label for="categoria" class="form-label">Categoria</label>
                 <select class="form-select" id="categoria" name="categoria">
                     <option value="Elettronica" <?php if ($prod["categoria"] == "Elettronica") echo "selected"; ?>>Elettronica</option>
-                    <option value="Abbigliamento" <?php if ($prod["categoria"] == "Abbigliamento") echo "selected"; ?>>Abbigliamento</option>
-                    <option value="Alimentari" <?php if ($prod["categoria"] == "Alimentari") echo "selected"; ?>>Alimentari</option>
+                    <option value="Didattica" <?php if ($prod["categoria"] == "Didattica") echo "selected"; ?>>Didattica</option>
+                    <option value="Usato" <?php if ($prod["categoria"] == "Usato") echo "selected"; ?>>Usato</option>
                 </select>
             </div>
             <div class="col-md-6">
