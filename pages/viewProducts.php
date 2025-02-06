@@ -38,7 +38,7 @@
 <script>
     let productStock = {
         <?php foreach ($pageParams["products"] as $prod): ?>
-            <?php echo (int)$prod['id']; ?>: <?php echo (int)$prod['disponibilita']; ?>,
+            <?php echo (int)$prod['id']; ?>: <?php echo (int)$prod['disponibilita']; ?>
         <?php endforeach; ?>
     };
 

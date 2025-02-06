@@ -111,7 +111,7 @@
             </h3>
             <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                <h4>No, su StudentMarket è consentita solo la vendita di prodotti adatti a un ambiente studentesco, come libri, elettronica, materiale didattico e oggetti di seconda mano. È vietata la vendita di articoli illegali, pericolosi o non conformi alle nostre linee guida</h4>
+                No, su StudentMarket è consentita solo la vendita di prodotti adatti a un ambiente studentesco, come libri, elettronica, materiale didattico e oggetti di seconda mano. È vietata la vendita di articoli illegali, pericolosi o non conformi alle nostre linee guida
                 </div>
             </div>
         </div>
