@@ -79,7 +79,7 @@ try {
             throw new Exception("Errore nell'aggiornamento della disponibilità del prodotto ID: $productId. " . $stmt->error);
         }
         $stmt->close();
-    }
+    
 
     $stmt = $conn->prepare("DELETE FROM ProdottiInCarrello WHERE id_Carrello = ?");
     $stmt->bind_param("i", $cartId);
@@ -95,17 +95,17 @@ try {
     $testo = "Notifica di conferma di avvenuto acquisto di ".$quantity." ".$item["nome"];
 
     $db->notificaAcquisto($acquistoId, $titolo, $testo, $userId);
-    $idVendita = $db->addVendita($db->getVenditoreByIdProdotto($productId), $productId, $quantity);
-
+    $idVendita = $db->addVendita($db->getVenditoreByIdProdotto($productId)["id"], $productId, $quantity);
     $titolo = "Vendita ".$item["nome"];
     $testo = "Notifica di conferma di avvenuta vendita di ".$quantity." ".$item["nome"];
-    $db->notificaVendita($idVendita, $titolo, $testo, $db->getVenditoreByIdProdotto($productId));
+    $db->notificaVendita($idVendita, $titolo, $testo, $db->getVenditoreByIdProdotto($productId)["id"]);
 
     if($newStock == 0){
         $titolo = "Esaurito ".$item["nome"];
         $testo = "Il tuo prodotto: ".$item["nome"]." è esaurito";
-        $db->notificaFineProdotto($productId, $titolo, $testo, $db->getVenditoreByIdProdotto($productId));
+        $db->notificaFineProdotto($productId, $titolo, $testo, $db->getVenditoreByIdProdotto($productId)["id"]);
     }
+}
 
     $conn->close();
 
