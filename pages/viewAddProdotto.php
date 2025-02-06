@@ -1,5 +1,17 @@
-<div class="mt-3">
-    <h2>Aggungi prodotto</h2>
+<?php if (isset($_SESSION["errore"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["errore"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; unset($_SESSION["errore"]);?>
+<div class="mt-3 mb-5">
+    <h4>Aggungi prodotto</h4>
         <form action="../php/executeAddProdotto.php" method="POST" enctype="multipart/form-data" class="row g-3">
             <div class="col-md-6">
                 <label for="nome" class="form-label fw-semibold fs-6 text-dark">Nome</label>

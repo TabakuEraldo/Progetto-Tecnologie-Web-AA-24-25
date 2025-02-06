@@ -19,16 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $img = $_FILES['immagine']['name'];
 
     if(empty($nome) || empty($prezzo) || empty($categoria) || empty($quantita) || empty($descrizione) || empty($img)){
-        die("Tutti i campi vanno riempiti");
+        $error = "Tutti i campi vanno riempiti";
     }
 
     if ($db->addProdotto($nome, $prezzo, $categoria, $quantita, $descrizione, $img, $_SESSION['user_id'])) {
-        echo "<script>
-                alert('Prodotto aggiunto con successo');
-                window.location.href = 'manageProducts.php';
-              </script>";        
+        $_SESSION["confermaAddProdotto"] = "Prodotto aggiunto con successo";
+        header("Location: manageProducts.php");
     } else {
-        die("Errore durante l'aggiunta");
+        $error = "Errore durante l'aggiunta";
     }
+}
+
+if(isset($error)){
+    $_SESSION["errore"] = $error;
+        header("Location: addProdotto.php");
 }
 ?>

@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-<?php endif; ?>
+<?php endif; unset($_SESSION["errore"]);?>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-sm" style="width: 100%; max-width: 400px;">
         <h4 class="text-center mb-4">Accedi al tuo account</h4>

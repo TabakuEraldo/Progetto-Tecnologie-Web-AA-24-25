@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center align-items-center"> 
-    <div class="mt-3 w-50">
-        <h2 class="text-center">Modifica password</h2>
+    <div class="mt-3 w-50 mb-5">
+        <h4 class="text-center">Modifica password</h4>
         <form action="../php/executeModificaPassword.php" method="POST" enctype="multipart/form-data" class="row g-3">
             <div class="col-12">
                 <label for="passwordAttuale" class="form-label fw-semibold fs-6 text-dark">Password corrente</label>
