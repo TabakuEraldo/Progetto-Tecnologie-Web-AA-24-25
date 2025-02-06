@@ -47,12 +47,8 @@ $aggLabels = array_keys($aggregated);
 $aggRevenues = array_values($aggregated);
 ?>
 
-<head>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
 <div class="container mt-4">
-    <h2 class="text-center">Statistiche Vendite</h2>
+    <h4 class="text-center">Statistiche Vendite</h4>
     <div class="row text-center mt-4">
         <div class="col-md-4">
             <div class="card bg-primary text-white">
@@ -84,11 +80,11 @@ $aggRevenues = array_values($aggregated);
         <div class="row">
             <div class="col-md-4">
                 <label for="start_date" class="form-label">Data Inizio:</label>
-                <input type="date" class="form-control" name="start_date" value="<?= $startDate ?>">
+                <input type="date" id="start_date" class="form-control" name="start_date" value="<?= $startDate ?>">
             </div>
             <div class="col-md-4">
                 <label for="end_date" class="form-label">Data Fine:</label>
-                <input type="date" class="form-control" name="end_date" value="<?= $endDate ?>">
+                <input type="date" id="end_date" class="form-control" name="end_date" value="<?= $endDate ?>">
             </div>
             <div class="col-md-4 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary w-100">Filtra</button>

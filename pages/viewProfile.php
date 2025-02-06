@@ -73,7 +73,7 @@ if (isset($_POST['cambiaRuolo'])) {
             <p><strong>Account:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
             <form method="POST" class="cambia-ruolo-form mb-3">
                 <button type="submit" name="cambiaRuolo" class="btn btn-warning btn-sm">
-                <p><strong>passa a:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Venditore' : 'Compratore'); ?></p> 
+                <strong>passa a:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Venditore' : 'Compratore'); ?>
                 </button>
             </form>
             <a href="../php/modificaProfilo.php" class="btn btn-secondary btn-sm">Modifica Profilo</a>

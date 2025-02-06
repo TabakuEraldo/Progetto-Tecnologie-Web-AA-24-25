@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/loginForm.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-custom navbar-expand-lg">
@@ -106,35 +107,7 @@
     </div>
 </footer>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const themeToggle = document.getElementById("themeToggle");
-        const themeIcon = document.getElementById("themeIcon");
-        const htmlElement = document.documentElement;
-        const storedTheme = localStorage.getItem("theme") || "light";
-        htmlElement.setAttribute("data-bs-theme", storedTheme);
-        updateIcon(storedTheme);
-        themeToggle.addEventListener("click", function () {
-            let currentTheme = htmlElement.getAttribute("data-bs-theme");
-            let newTheme = currentTheme === "light" ? "dark" : "light";
-            htmlElement.setAttribute("data-bs-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-            updateIcon(newTheme);
-        });
-
-        function updateIcon(theme) {
-            if (theme === "light") {
-                themeIcon.classList.remove("bi-sun");
-                themeIcon.classList.add("bi-moon");
-                themeToggle.title = "Passa alla modalità notte";
-            } else {
-                themeIcon.classList.remove("bi-moon");
-                themeIcon.classList.add("bi-sun");
-                themeToggle.title = "Passa alla modalità chiara";
-            }
-        }
-    });
-</script>
+<script src="../js/base.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
