@@ -116,6 +116,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function showErrorMessage(message) {
+    let errorContainer = document.querySelector(".toast-container");
+    if (!errorContainer) {
+        errorContainer = document.createElement("div");
+        errorContainer.className = "position-fixed top-25 start-50 translate-middle-x p-3 toast-container";
+        document.body.appendChild(errorContainer);
+    }
+    
+    let toast = document.createElement("div");
+    toast.className = "toast align-items-center text-bg-danger border-0 show";
+    toast.setAttribute("role", "alert");
+    toast.setAttribute("aria-live", "assertive");
+    toast.setAttribute("aria-atomic", "true");
+    
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                ${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    `;
+    
+    errorContainer.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 3000);
+}
+
 function updateQuantity(cartItemId, change) {
     let qtyElem = document.getElementById("quantity-" + cartItemId);
     let currentQty = parseInt(qtyElem.value);
@@ -134,15 +161,16 @@ function updateQuantity(cartItemId, change) {
                 qtyElem.value = currentQty + change;
                 location.reload();
             } else {
-                alert("Errore nell'aggiornamento della quantità. Risposta: " + data);
+                showErrorMessage("Errore nell'aggiornamento della quantità. Risposta: " + data);
             }
         })
         .catch(error => {
             console.error("Errore nella richiesta:", error);
-            alert("Si è verificato un errore nella richiesta.");
+            showErrorMessage("Si è verificato un errore nella richiesta.");
         });
     } else {
-        alert("La quantità richiesta supera la disponibilità del prodotto.");
+        showErrorMessage("La quantità non disponibile");
     }
 }
+
 </script>

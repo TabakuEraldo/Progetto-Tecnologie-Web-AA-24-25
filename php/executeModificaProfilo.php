@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(empty($id)){
-        die("Errore");
+        $_SESSION["errore"] = "Errore durante la modifica";
     }
 
     if ($db->modificaProfiloGenerale($id, $nome, $cognome, $email, $indirizzo, $img)) {
@@ -34,12 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_indirizzo'] = $indirizzo;
         $_SESSION['user_email'] = $email;
         $_SESSION['user_img'] = $img;
-        echo "<script>
-                alert('Profilo modificato con successo');
-                window.location.href = 'profile.php';
-              </script>";
+        $_SESSION["confermaModificaProf"] = "Profilo modificato con successo";
     } else {
-        die("Errore durante la modifica");
+        $_SESSION["errore"] = "Errore durante la modifica";
     }
+
+    header("Location: profile.php");
 }
 ?>

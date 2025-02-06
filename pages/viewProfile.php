@@ -20,6 +20,42 @@ if ($userId) {
 }
 
 ?>
+<?php if (isset($_SESSION["confermaModificaProf"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["confermaModificaProf"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; unset($_SESSION["confermaModificaProf"]);?>
+<?php if (isset($_SESSION["confermaModificaPass"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["confermaModificaPass"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; unset($_SESSION["confermaModificaPass"]);?>
+<?php if (isset($_SESSION["errore"])): ?>
+    <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
+        <div id="errorToast" class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <?= htmlspecialchars($_SESSION["errore"]) ?>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; unset($_SESSION["errore"]);?>
 
 <div class="container mt-5">
     <div class="card text-center mb-4">

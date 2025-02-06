@@ -17,19 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confermaPass = $_POST['confermaNuova'];
     
     if(empty($id)){
-        die("Errore nella modifica della password");
+        $_SESSION["errore"] = "Errore nella modifica della password";
     }
 
     if(password_verify($passAtt, $db->getPassByID($id)["password"])){
         if ($nuovaPass === $confermaPass) {
             $hashedPassword = password_hash($nuovaPass, PASSWORD_DEFAULT);
             if($db->modificaPass($id, $hashedPassword)){
-                echo "<script>
-                alert('Password modificata con successo');
-                window.location.href = 'modificaProfilo.php';
-              </script>";
+                $_SESSION["confermaModificaPass"];
             }
         }
     }
+
+    header("Location: modificaProfilo.php");
 }
 ?>
