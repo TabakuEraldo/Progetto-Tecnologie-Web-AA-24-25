@@ -67,8 +67,7 @@ if ($stmt->num_rows > 0) {
 
     $newQuantity = $existingQuantity + $quantity;
     if ($newQuantity > $product['disponibilita']) {
-        header("Location: ../pages/viewProducts.php?error=exceeds_availability");
-        exit();
+        $newQuantity = $product['disponibilita'];
     }
 
     $stmt = $conn->prepare("UPDATE ProdottiInCarrello SET quantita = ? WHERE id = ?");

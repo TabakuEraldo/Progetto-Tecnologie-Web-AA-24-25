@@ -26,7 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if($db->modificaPass($id, $hashedPassword)){
                 $_SESSION["confermaModificaPass"];
             }
+            else{
+                $_SESSION["errore"] = "Errore nella modifica della password";
+            }
         }
+        else{
+            $_SESSION["errore"] = "Errore nella modifica della password";
+        }
+    }
+    else
+    {
+        $_SESSION["errore"] = "Errore nella modifica della password";
     }
 
     header("Location: modificaProfilo.php");

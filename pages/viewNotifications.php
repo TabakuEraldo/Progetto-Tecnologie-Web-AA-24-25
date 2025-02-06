@@ -5,11 +5,11 @@
         <?php foreach($pageParams["notifiche"] as $not): ?>
             <tr>
                 <?php if($not["isLetto"] == 0):?>
-                    <td  data-id="<?php echo $not['id']; ?>"><strong><?php echo $not["titolo"]?></strong></td>
+                    <td  data-id="<?php echo $not['id']; ?>"><a href="../php/readNotification.php?id=<?php echo $not['id']; ?>"><strong><?php echo $not["titolo"]?></strong></a></td>
                 <?php else: ?>
-                    <td  data-id="<?php echo $not['id']; ?>"><?php echo $not["titolo"]?></td>
+                    <td  data-id="<?php echo $not['id']; ?>"><a href="../php/readNotification.php?id=<?php echo $not['id']; ?>"><?php echo $not["titolo"]?></a></td>
                 <?php endif; ?>
-                <td class="text-end"><a href="../php/readNotification.php?id=<?php echo $not['id']; ?>">leggi</a></td>
+                <td class="text-end"><?php echo $not['data']; ?></td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

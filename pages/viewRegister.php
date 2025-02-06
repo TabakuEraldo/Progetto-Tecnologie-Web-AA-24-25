@@ -1,15 +1,15 @@
-<?php if (isset($_SESSION["errore"])): ?>
+<?php if (isset($pageParams["errore"])): ?>
     <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
         <div id="errorToast" class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    <?= htmlspecialchars($_SESSION["errore"]) ?>
+                    <?= htmlspecialchars($pageParams["errore"]) ?>
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
-<?php endif; unset($_SESSION["errore"]);?>
+<?php endif; unset($pageParams["errore"]);?>
 <div class="container d-flex justify-content-center align-items-center min-vh-100 mb-5">
     <div class="card p-4 shadow-sm w-100 col-md-6 col-lg-4 col-xl-3">
         <h4 class="text-center mb-4">Registrati al sito</h4>
