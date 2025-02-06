@@ -1,4 +1,4 @@
 <?php
 require_once("../DB/database.php");
-$db = new Database("localhost", "root", "", "ecommercedb");
+$db = new DataBase("localhost", "root", "", "ecommercedb");
 ?>

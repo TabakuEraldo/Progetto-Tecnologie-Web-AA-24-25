@@ -19,7 +19,14 @@ if ($userId) {
     $profileImage = '../img/default.png';
 }
 
+if (isset($_POST['cambiaRuolo'])) {
+    $newRole = ($userRole == 'buyer') ? 'seller' : 'buyer';
+    $_SESSION['user_role'] = $newRole;
+    header("Location: profile.php");
+    exit();
+}
 ?>
+
 <?php if (isset($_SESSION["confermaModificaProf"])): ?>
     <div class="position-fixed top-25 start-50 translate-middle-x p-3 toast-container">
         <div id="errorToast" class="toast align-items-center text-bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
@@ -64,6 +71,11 @@ if ($userId) {
             <h4><?php echo htmlspecialchars($userName); ?></h4>
             <p class="text-muted"><?php echo htmlspecialchars($userEmail); ?></p>
             <p><strong>Account:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Compratore' : 'Venditore'); ?></p>
+            <form method="POST" class="cambia-ruolo-form mb-3">
+                <button type="submit" name="cambiaRuolo" class="btn btn-warning btn-sm">
+                <p><strong>passa a:</strong> <?php echo htmlspecialchars($userRole == 'buyer' ? 'Venditore' : 'Compratore'); ?></p> 
+                </button>
+            </form>
             <a href="../php/modificaProfilo.php" class="btn btn-secondary btn-sm">Modifica Profilo</a>
             <a href="../php/notifications.php" class="btn btn-danger btn-sm">Notifiche</a>
             <a href="../php/logout.php" class="btn btn-danger btn-sm">Logout</a>
@@ -127,6 +139,15 @@ if ($userId) {
                                 <h5 class="card-title">Storico Vendite</h5>
                                 <p class="card-text">Consulta lo storico delle tue vendite.</p>
                                 <a href="../php/storicoVendite.php" class="btn btn-primary btn-sm">Visualizza Storico</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3 text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Statistiche</h5>
+                                <p class="card-text">Consulta le statistiche relative alle vendite dei tuoi prodotti</p>
+                                <a href="../php/Statistiche.php" class="btn btn-primary btn-sm">Visualizza Statistiche</a>
                             </div>
                         </div>
                     </div>

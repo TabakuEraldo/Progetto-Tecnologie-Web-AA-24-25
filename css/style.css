@@ -1,7 +1,7 @@
 .navbar-custom .offcanvas-body,
 .navbar-custom .offcanvas-title,
 .navbar-custom .offcanvas-end {
-        background-color: #A5C279;
+        background-color: #0056b3;
         backdrop-filter: blur(10px);
 }
 
@@ -10,7 +10,7 @@
 }
 
 .navbar-custom{
-    background-color: #A5C279;
+    background-color: #0056b3;
 }
 
 
@@ -86,22 +86,22 @@
         width: 120px;
         padding: 10px;
         text-align: center;
-        border: 2px solid #A5C279;
+        border: 2px solid  #ff7f32;
         border-radius: 8px; 
         font-weight: bold;
         cursor: pointer;
         transition: 0.3s;
         background-color: #f8f9fa;
-        color: #B0C4B1;
+        color:  #ff7f32;
 }
 
     .btn-check:checked + .role-btn {
-        background-color: #A5C279;
-        color: #A5C279;
+        background-color:  #ff7f32;
+        color:  #ff7f32;
     }
 
     .role-btn:hover {
-        background-color: #275e2a;
+        background-color:  #ffab76;
         color: white;
     }
 
@@ -113,22 +113,22 @@
     }
 
 header.bg-primary {
-    background-color: #A5C279!important;
+    background-color:  #ff7f32!important;
 }
 
 .card.p-4.shadow {
-    background-color: #A5C279 !important;
+    background-color:  #ff7f32 !important;
     color: white !important;
     border: none;
     transition: background-color 0.3s ease-in-out;
 }
 
 .card.p-4.shadow:hover {
-    background-color: #A5C279 !important;
+    background-color:  #ff6200!important;
 }
 
 footer.bg-dark {
-    background-color: #A5C279 !important;
+    background-color:  #0056b3!important;
     color: white !important;
 }
 
@@ -145,7 +145,7 @@ footer a.text-white-50:hover {
 }
 
 #themeToggle:hover {
-    background-color: #A5C279;
+    background-color: #0056b3;
     color: #fff;
 }
 
@@ -156,7 +156,7 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-    background-color: #343a40;
+    background-color:  #0056b3;
     color: white;
 }
 
@@ -165,7 +165,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #B0C4B1;
+    color:  #218dff;
 }
 
 footer h5 {
@@ -174,13 +174,13 @@ footer h5 {
 }
 
 footer .btn-danger {
-    background-color: #A5C279;
-    border-color: #A5C279;
+    background-color:  #0056b3;
+    border-color:  #0056b3;
 }
 
 footer .btn-danger:hover {
-    background-color: #A5C279;
-    border-color: #A5C279;
+    background-color:  #0056b3;
+    border-color:  #0056b3;
 }
 
 @media (max-width: 768px) {
@@ -193,4 +193,8 @@ footer .btn-danger:hover {
         list-style: none;
     }
 
+}
+
+.cambia-ruolo-form {
+    margin-bottom: 20px;
 }

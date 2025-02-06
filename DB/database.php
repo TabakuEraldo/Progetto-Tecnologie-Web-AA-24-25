@@ -247,5 +247,26 @@ class DataBase{
         $query->bind_param("si", $pass,$userId);
         return $query->execute();
     }
+
+    public function getNumeroTotaleVendite($userId) {
+        $query = $this->db->prepare("SELECT COUNT(*) as totale FROM vendite WHERE id_Utente = ?");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        $result = $query->get_result()->fetch_assoc();
+        return $result['totale'];
+    }
+    
+    public function getTotaleGuadagni($userId) {
+        $query = $this->db->prepare("SELECT SUM(prodotti.prezzo * venditaprodotti.quantita) as guadagni 
+                                     FROM venditaprodotti 
+                                     JOIN prodotti ON venditaprodotti.id_Prodotto = prodotti.id
+                                     JOIN vendite ON venditaprodotti.id_Vendita = vendite.id
+                                     WHERE vendite.id_Utente = ?");
+        $query->bind_param("i", $userId);
+        $query->execute();
+        $result = $query->get_result()->fetch_assoc();
+        return $result['guadagni'];
+    }
+    
 }
 ?>
