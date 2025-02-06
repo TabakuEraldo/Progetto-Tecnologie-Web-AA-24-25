@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 $db = new DataBase("localhost", "root", "", "ecommercedb"); 
 $userId = $_SESSION['user_id'];
 
-// Recupera l'ID del carrello dell'utente
 $conn = $db->getConnection();
 $stmt = $conn->prepare("SELECT id FROM Carrelli WHERE id_Utente = ?");
 $stmt->bind_param("i", $userId);
@@ -40,8 +39,8 @@ if ($cartId !== null) {
 $conn->close();
 ?>
 
-<div class="container mt-5">
-    <h2 class="mb-4">Il tuo carrello</h2>
+<div class="container mt-5 mb-5">
+    <h4 class="mb-4">Il tuo carrello</h4>
 
     <?php if (empty($cartItems)): ?>
         <div class="alert alert-info">Il carrello è vuoto.</div>
@@ -74,6 +73,7 @@ $conn->close();
                         <td>
                             <div class="input-group input-group-sm">
                                 <button class="btn btn-outline-primary" onclick="updateQuantity(<?php echo $item['cart_item_id']; ?>, -1)">-</button>
+                                <label for="quantity-<?php echo $item['cart_item_id']; ?>" class="visually-hidden">Quantita</label>
                                 <input type="number" class="form-control text-center" id="quantity-<?php echo $item['cart_item_id']; ?>"
                                     value="<?php echo $item['quantita']; ?>"
                                     data-available-qty="<?php echo $item['disponibilita']; ?>" min="1" 
@@ -106,10 +106,8 @@ function updateQuantity(cartItemId, change) {
     let qtyElem = document.getElementById("quantity-" + cartItemId);
     let currentQty = parseInt(qtyElem.value);
 
-    // Recupera la disponibilità massima del prodotto dal database
     let availableQty = parseInt(qtyElem.getAttribute('data-available-qty'));
 
-    // Verifica che la quantità selezionata non superi la disponibilità
     if (currentQty + change >= 1 && currentQty + change <= availableQty) {
         fetch("../php/updateCart.php", {
             method: "POST",
@@ -118,10 +116,10 @@ function updateQuantity(cartItemId, change) {
         })
         .then(response => response.text())
         .then(data => {
-            console.log(data); // Stampa la risposta del server nel console log
+            console.log(data);
             if (data === "success") {
                 qtyElem.value = currentQty + change;
-                location.reload(); // Ricarica la pagina per aggiornare il totale
+                location.reload();
             } else {
                 alert("Errore nell'aggiornamento della quantità. Risposta: " + data);
             }
