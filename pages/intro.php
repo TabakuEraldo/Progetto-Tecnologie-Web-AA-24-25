@@ -10,21 +10,21 @@
         <h2 class="text-center">Categorie in evidenza</h2>
         <div class="row text-center mt-4">
             <div class="col-md-4">
-                <a href="shop.php?category=didattica" class="text-decoration-none text-dark">
+                <a href="shop.php?search=didattica" class="text-decoration-none text-dark">
                     <div class="card p-4 shadow">
                         <h3>Didattica</h3>
                     </div>
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="shop.php?category=elettronica" class="text-decoration-none text-dark">
+                <a href="shop.php?search=elettronica" class="text-decoration-none text-dark">
                     <div class="card p-4 shadow">
                         <h3>Elettronica</h3>
                     </div>
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="shop.php?category=usato" class="text-decoration-none text-dark">
+                <a href="shop.php?search=usato" class="text-decoration-none text-dark">
                     <div class="card p-4 shadow">
                         <h3>Usato</h3>
                     </div>

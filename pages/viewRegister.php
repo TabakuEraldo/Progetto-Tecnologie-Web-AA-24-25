@@ -13,11 +13,11 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100 mb-5">
     <div class="card p-4 shadow-sm w-100 col-md-6 col-lg-4 col-xl-3">
         <h4 class="text-center mb-4">Registrati al sito</h4>
-        <form action="../php/executeRegistration.php" method="POST">
+        <form action="../php/executeRegistration.php" method="POST" enctype="multipart/form-data">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label for="fullName" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
                 </div>
                 <div class="col-md-6">
                     <label for="cognome" class="form-label">Cognome</label>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="profileImage" class="form-label">Immagine del Profilo</label>
+                    <label for="profileImage" class="form-label fw-semibold fs-6 text-dark">Immagine (non è obbligatoria)</label>
                     <input type="file" class="form-control" id="profileImage" name="profileImage" accept="image/*">
                 </div>
                 <div class="col-md-12">

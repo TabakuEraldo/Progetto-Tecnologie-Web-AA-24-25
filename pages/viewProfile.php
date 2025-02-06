@@ -39,7 +39,6 @@ if ($userId) {
             <h4 class="text-center mb-3">Dashboard</h4>
             <div class="row">
                 <?php if ($userRole == 'buyer'): ?>
-                    <!-- Se l'utente è un compratore -->
                     <div class="col-md-4">
                         <div class="card mb-3 text-center">
                             <div class="card-body">
@@ -68,7 +67,6 @@ if ($userId) {
                         </div>
                     </div>
                 <?php elseif ($userRole == 'seller'): ?>
-                    <!-- Se l'utente è un venditore -->
                     <div class="col-md-4">
                         <div class="card mb-3 text-center">
                             <div class="card-body">

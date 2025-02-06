@@ -14,9 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cart_item_id'], $_POST
     $cartItemId = intval($_POST['cart_item_id']);
     $quantity = intval($_POST['quantity']);
 
-    // Verifica che la quantità sia maggiore di 0
     if ($quantity > 0) {
-        // Ottieni la disponibilità del prodotto
         $stmt = $conn->prepare("SELECT p.disponibilita FROM ProdottiInCarrello pic 
                                 INNER JOIN Prodotti p ON pic.id_Prodotto = p.id 
                                 WHERE pic.id = ?");
@@ -26,9 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cart_item_id'], $_POST
         $stmt->fetch();
         $stmt->close();
 
-        // Verifica se la quantità richiesta è disponibile
         if ($quantity <= $availableQty) {
-            // Aggiorna la quantità nel carrello
             $stmt = $conn->prepare("UPDATE ProdottiInCarrello SET quantita = ? WHERE id = ?");
             $stmt->bind_param("ii", $quantity, $cartItemId);
             if ($stmt->execute()) {
@@ -38,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cart_item_id'], $_POST
             }
             $stmt->close();
         } else {
-            // Se la quantità richiesta supera la disponibilità
             echo "La quantità richiesta supera la disponibilità.";
         }
     } else {

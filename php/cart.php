@@ -14,7 +14,6 @@ $conn = $db->getConnection();
 
 $userId = $_SESSION['user_id'];
 
-// Recupera l'ID del carrello dell'utente
 $stmt = $conn->prepare("SELECT id FROM Carrelli WHERE id_Utente = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();

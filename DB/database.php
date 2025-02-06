@@ -29,16 +29,20 @@ class DataBase{
         return $query->get_result();
     }
 
-    public function isAlreadyRegistered($email){
+    public function isAlreadyRegistered($email) {
+        $email = strtolower(trim($email));     
         $sql = "SELECT id FROM utenti WHERE email = ?";
         $stmt = $this->db->prepare($sql);
-        $email = $this->db->real_escape_string($email);
+        if (!$stmt) {
+            die("Errore nella preparazione della query: " . $this->db->error);
+        }
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
-
+             
         return $stmt->num_rows;
     }
+    
 
     public function registration($nome, $cognome, $email, $indirizzo, $hashedPassword, $profileImage) {
         $stmt = $this->db->prepare("INSERT INTO utenti (nome, cognome, email, indirizzo, password, imgProfilo) VALUES (?, ?, ?, ?, ?, ?)");
@@ -61,7 +65,7 @@ class DataBase{
             WHERE nome LIKE ? 
             OR descrizione LIKE ? 
             OR categoria LIKE ?
-        ");
+            AND disponibilita > 0");
     
         if (!$query) {
             die("Errore nella preparazione della query: " . $this->db->error);
@@ -132,7 +136,7 @@ class DataBase{
     }
 
     public function getProductsByCategory($category) {
-        $query = $this->db->prepare("SELECT * FROM prodotti WHERE categoria = ?");
+        $query = $this->db->prepare("SELECT * FROM prodotti WHERE categoria = ? AND disponibilita > 0");
         $query->bind_param("s", $category);
         $query->execute();
         return $query->get_result()->fetch_all(MYSQLI_ASSOC);

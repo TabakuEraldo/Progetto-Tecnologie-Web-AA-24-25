@@ -4,7 +4,6 @@ require_once '../DB/database.php';
 $db = new DataBase("localhost", "root", "", "ecommercedb");
 $conn = $db->getConnection();
 
-// Recupera gli ultimi 6 prodotti aggiunti
 $sql = "SELECT id, nome, immagine, prezzo, descrizione FROM Prodotti WHERE disponibilita>0 ORDER BY ID DESC LIMIT 3";
 $result = $conn->query($sql);
 
@@ -17,7 +16,6 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// Restituisce i dati in formato JSON
 header('Content-Type: application/json');
 echo json_encode($products);
 ?>

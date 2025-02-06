@@ -2,13 +2,12 @@
 session_start();
 require_once '../DB/database.php';
 
-// Verifica che l'utente sia loggato
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../pages/login.php");
     exit();
 }
 
-// Crea un'istanza del database
 $db = new DataBase("localhost", "root", "", "ECommerceDB");
 $conn = $db->getConnection();
 
@@ -16,13 +15,11 @@ $userId = $_SESSION['user_id'];
 $productId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1;
 
-// Controllo parametri validi
 if ($productId <= 0 || $quantity <= 0) {
     header("Location: ../pages/viewProducts.php?error=invalid_parameters");
     exit();
 }
 
-// Controllo disponibilità del prodotto
 $stmt = $conn->prepare("SELECT disponibilita FROM Prodotti WHERE id = ?");
 $stmt->bind_param("i", $productId);
 $stmt->execute();
@@ -35,13 +32,11 @@ if ($result->num_rows == 0) {
 $product = $result->fetch_assoc();
 $stmt->close();
 
-// Controllo se la quantità richiesta supera la disponibilità
 if ($quantity > $product['disponibilita']) {
     header("Location: ../pages/viewProducts.php?error=exceeds_availability");
     exit();
 }
 
-// Recupero o creazione del carrello
 $stmt = $conn->prepare("SELECT id FROM Carrelli WHERE id_Utente = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -60,7 +55,6 @@ if ($stmt->num_rows == 0) {
     $stmt->close();
 }
 
-// Verifica se il prodotto è già nel carrello
 $stmt = $conn->prepare("SELECT id, quantita FROM ProdottiInCarrello WHERE id_Carrello = ? AND id_Prodotto = ?");
 $stmt->bind_param("ii", $cartId, $productId);
 $stmt->execute();
@@ -89,7 +83,6 @@ if ($stmt->num_rows > 0) {
     $stmt->close();
 }
 
-// Chiudi la connessione e reindirizza al carrello
 $conn->close();
 header("Location: ../pages/cart.php?success=1");
 exit();

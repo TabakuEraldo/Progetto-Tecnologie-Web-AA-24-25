@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(empty($id)){
-        die("Errore nella modifica del prodotto");
+        die("Errore");
     }
 
     if ($db->modificaProfiloGenerale($id, $nome, $cognome, $email, $indirizzo, $img)) {
